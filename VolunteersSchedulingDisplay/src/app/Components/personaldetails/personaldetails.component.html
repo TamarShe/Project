@@ -1,0 +1,40 @@
+  <img src="../../../assets/dots.gif" *ngIf="loading"/>
+  <form (submit)="UpdateVolunteer(frm)" #frm="ngForm" *ngIf="!loading">
+  <div >
+    <mat-form-field >
+      <mat-label>תעודת זהות</mat-label>
+      <input name="id"  [(ngModel)]="volunteer.volunteer_ID" ngDefaultControl matInput  style="color: black;"/>
+    </mat-form-field>
+  <mat-form-field >
+    <mat-label>שם מלא</mat-label>
+    <input name="full_name" [(ngModel)]="volunteer.volunteer_full_name"  ngDefaultControl matInput/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>טלפון</mat-label>
+    <input name="phone" style="direction: ltr;" [(ngModel)]="volunteer.volunteer_phone"  ngDefaultControl matInput/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>כתובת</mat-label>
+    <input #address name="address" ngx-google-places-autocomplete [autocomplete]="autocomplete" type="text" matInput ngDefaultControl  [(ngModel)]="volunteer.volunteer_address">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>כתובת מייל</mat-label>
+    <input name="email" style="direction: ltr;" [(ngModel)]="volunteer.volunteer_email" [formControl]="emailFormControl" ngDefaultControl matInput/>
+    <mat-error *ngIf="emailFormControl.hasError('required')">חובה להכניס כתובת מייל תקינה</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>סיסמה לאתר</mat-label>
+    <input name="password" style="direction: ltr;" [formControl]="passwordFormControl" [(ngModel)]="volunteer.volunteer_password"  ngDefaultControl matInput/>
+    <mat-error *ngIf="passwordFormControl.hasError('required')">חובה להכניס סיסמה</mat-error>
+    <mat-error *ngIf="flag"> סיסמה זו תפוסה, בחר סיסמה אחרת</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>תאריך לידה</mat-label>
+    <input name="date" matInput [matDatepicker]="picker" style="direction:ltr">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker name="birthdate" #picker [(ngModel)]="volunteer.volunteer_birth_date" ngDefaultControl></mat-datepicker>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button color="accent" style="font-size: larger;"  type="submit">אישור</button>
+  </div>
+</form>

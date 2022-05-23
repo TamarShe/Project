@@ -1,0 +1,130 @@
+<form #frm>
+<div class="buttonsDiv">
+  <button mat-raised-button color="primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+    <button mat-raised-button color="secondary" mwlCalendarToday [(viewDate)]="viewDate">
+    <!-- <mat-icon>calendar_today</mat-icon> -->
+    היום
+    </button>
+  <button mat-raised-button color="primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <br><br><br><br>
+<button mat-raised-button color="primary" class="buttons" (click)="GenerateSchedule()">
+  <mat-icon>border_all</mat-icon>
+  הפעל שיבוץ!
+  </button>
+  <br><br>
+<button mat-raised-button color="primary" class="buttons" (click)="matDialog.open(addScheduling)">
+  <mat-icon>add_circle</mat-icon>
+  שיבוץ ידני
+  </button>
+</div>
+
+<div class="calendarDiv">
+  <img src="../../../assets/dots.gif" *ngIf="loading"/>
+  <div *ngIf="!loading">
+     <mwl-calendar-month-view [cellTemplate]="event" [locale]="locale" [viewDate]="viewDate" [events]="events">
+         {{ viewDate | calendarDate:(view + 'ViewTitle'):'He' }}
+    </mwl-calendar-month-view>
+  </div>
+</div>
+</form>
+
+
+
+<ng-template #addScheduling>
+  <form #addTimeSlot (submit)="saveNewTimeSlot(addTimeSlot)" class="addTimeSlotForm">
+    <div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>מתנדב</mat-label>
+      <input type="text" aria-label="מתנדב" matInput  placeholder="הקלד כדי לחפש" [matAutocomplete]="auto1" [formControl]="volunteersControl">
+      <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete">
+        <mat-option *ngFor="let option1 of filteredVolunteers | async" (onSelectionChange)="updateVSelection(option1.volunteer_ID)" [value]="option1.volunteer_full_name">
+          {{option1.volunteer_full_name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>אצל</mat-label>
+      <input type="text" aria-label="אצל" matInput placeholder="הקלד כדי לחפש" [matAutocomplete]="auto2" [formControl]="neediesControl">
+      <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+        <mat-option *ngFor="let option2 of filteredNeedies | async" (onSelectionChange)="updateNSelection(option2.needy_ID)" [value]="option2.needy_full_name">
+          {{option2.needy_full_name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <br>
+
+       <mat-form-field  appearance="fill" class="hours">
+         <mat-label>שעת התחלה</mat-label>
+         <input name="startHour" type="time" [(ngModel)]="newTimeSlot.start_at_hour" matInput>
+       </mat-form-field>
+       <mat-form-field appearance="fill" class="hours">
+         <mat-label>שעת סיום</mat-label>
+         <input name="endHour" type="time" [(ngModel)]="newTimeSlot.end_at_hour" matInput >
+       </mat-form-field><br>
+       <label class="comment">שים לב - מספר הדקות שתבחר יתעגל לרבע השעה הקרובה</label>
+
+     <br>
+     <mat-form-field appearance="fill">
+   <mat-label>בחר טווח תאריכים</mat-label>
+   <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+     <input name="start" matStartDate [(ngModel)]="newTimeSlot.start_at_date" formControlName="start" placeholder="תאריך התחלה">
+     <input name="end" matEndDate [(ngModel)]="newTimeSlot.end_at_date" formControlName="end" placeholder="תאריך סיום" >
+   </mat-date-range-input>
+   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+   <mat-date-range-picker #picker></mat-date-range-picker>
+   <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">תאריך התחלה לא תקין</mat-error>
+   <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">תאריך סיום לא תקין</mat-error>
+ </mat-form-field>
+     <br>
+    <mat-form-field appearance="fill">
+      <mat-label>יום בשבוע</mat-label>
+      <input type="text" aria-label="יום בשבוע" matInput [matAutocomplete]="auto3">
+      <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete">
+        <mat-option *ngFor="let day of days" [value]="day.name" (onSelectionChange)="updateDaySelection(day.code)">
+          {{day.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+     <br><br>
+     <button name="save" mat-raised-button color="accent" class="ok" type="submit" >אישור</button>
+     <button mat-button mat-dialog-close>סגור</button>
+     <br>
+   </div>
+ </form>
+</ng-template>
+
+<ng-template #detail>
+  <div class="detailsDialog">
+  <br>
+  <textarea  disabled="true" class="textDetails"  [(ngModel)]="details"></textarea>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="accent" (click)="saveChanges();">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-button mat-dialog-close>סגור</button>
+  </div>
+</div>
+</ng-template>
+
+<ng-template #event let-day="day" let-locale="locale">
+    <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}
+      <div class="cal-cell-top">
+          <ng-container *ngFor="let event of day.events">
+            <button class="summary" *ngIf="check(day.date,event)"  (click)="onDetailsClick(event,day);matDialog.open(detail)">
+              מתנדב: {{event.volunteer.volunteer_full_name}}
+              אצל {{event.needy.needy_full_name}}
+            </button>
+            </ng-container>
+          </div>
+  </span>
+</ng-template>
+
+
+

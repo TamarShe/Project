@@ -1,0 +1,90 @@
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\obj\Debug\BL.csprojAssemblyReference.cache
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Accord.dll.config
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\BL.dll.config
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\BL.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\BL.pdb
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Accord.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Accord.Genetic.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Accord.Math.Core.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Accord.Math.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\DAL.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Google.Protobuf.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\MODELS.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Newtonsoft.Json.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Buffers.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Memory.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Net.Http.Formatting.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Numerics.Vectors.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Web.Cors.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Web.Http.Cors.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Web.Http.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\EntityFramework.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\DAL.pdb
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\DAL.dll.config
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\MODELS.pdb
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\MODELS.dll.config
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Accord.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Accord.Genetic.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Accord.Math.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Accord.Math.Core.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Google.Protobuf.pdb
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Google.Protobuf.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\Newtonsoft.Json.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Buffers.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Memory.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Net.Http.Formatting.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Numerics.Vectors.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Web.Http.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\System.Web.Http.Cors.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\bin\Debug\EntityFramework.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\obj\Debug\BL.csproj.CopyComplete
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\obj\Debug\BL.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\obj\Debug\BL.pdb
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\obj\Debug\BL.csproj.AssemblyReference.cache
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\obj\Debug\BL.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\obj\Debug\BL.pdb
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Accord.dll.config
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\BL.dll.config
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\BL.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\BL.pdb
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Accord.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Accord.Genetic.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Accord.Math.Core.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Accord.Math.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\DAL.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Google.Protobuf.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\MODELS.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Buffers.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Memory.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Web.Cors.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Web.Http.Cors.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Web.Http.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\EntityFramework.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\DAL.pdb
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\DAL.dll.config
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\MODELS.pdb
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\MODELS.dll.config
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Accord.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Accord.Genetic.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Accord.Math.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Accord.Math.Core.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Google.Protobuf.pdb
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Google.Protobuf.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Buffers.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Memory.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Web.Http.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\System.Web.Http.Cors.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\bin\Debug\EntityFramework.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\BL\obj\Debug\BL.csproj.CopyComplete

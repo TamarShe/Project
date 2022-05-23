@@ -1,0 +1,106 @@
+table {
+  border-collapse: collapse;
+  text-align: center;
+  background-color: white;
+  height: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: fixed;
+  font-size: small;
+}
+
+th, td {
+  padding-right: 13px;
+  padding-left: 13px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-bottom: black 1px solid;
+  border-top: black 1px solid;
+}
+
+thead, tfoot {
+  font-style: bold;
+  color: rgb(0, 0, 0);
+}
+
+tr{
+  height: min-content;
+}
+
+thead th, tfoot th, tfoot td {
+  background-color: #ebebeb;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+.mat-form-field
+{
+ text-align: right
+}
+
+img
+{
+  width:100px;
+  text-align: center;
+}
+
+form{
+  background-color: transparent;
+  text-align: center;
+}
+
+.addNeedies
+{
+  float: right;
+  padding: 25px;
+  padding-top: 3px;
+  text-align: center;
+  margin-top: 4%;
+  margin-right: 6%;
+}
+
+.tableDiv
+{
+  float: left;
+  background-color: #ffffff;
+  text-align: center;
+  height:450px;
+  width: 70%;
+  overflow-y: scroll;
+  margin-top: 4%;
+  margin-left: 6%;
+  float: left;
+  padding: 1%;
+  padding-top: 1.5%;
+}
+
+.refresh
+{
+  float: right;
+  text-align: right;
+  margin-right: 2%;
+}
+
+.Dialog{
+  padding: 00px;
+  margin:0px;
+  direction: rtl;
+  justify-content: space-between;
+  text-align: center;
+  display: block;
+  width:1200px;
+  overflow-x: hidden;
+  margin-bottom: 20px;
+}
+
+
+
+
+
+

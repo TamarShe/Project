@@ -1,0 +1,29 @@
+<body  style="background-image: url('../assets/back.png') ; direction: rtl;background-size: 100%;background-repeat: no-repeat;background-attachment: fixed;position: center;">
+  <header style="background-image: url('../assets/grayHeadder.png');height: 90px;">
+   <img src="../assets/logo.png" height="85px"  style="opacity:150%; margin-right: 70px;margin-top: 8px;cursor: pointer;" (click)="HomePage()">  <img src="../assets/logozefat.png" height="70px" style="opacity:150%;margin-right: 900px;cursor: pointer;">
+ </header>
+ <div  *ngIf="showButtons">
+	<div style="display:flex;text-align:center;margin-right: 18%;">
+  <div>
+  <app-counter [digit]="orgSum" [duration]="3000"></app-counter>
+    <h2>ארגונים</h2>
+</div>
+<div>
+  	<app-counter [digit]="volunteersSum" [duration]="3000"></app-counter>
+    <h2>מתנדבים</h2>
+</div>
+<div>
+  	<app-counter [digit]="neediesSum" [duration]="3000"></app-counter>
+      <h2> נעזרים</h2>
+</div>
+</div>
+<br><br>
+<h3>בא לקחת חלק בנתינה!</h3>
+<br><br>
+<div class="counters">
+  <button mat-raised-button color="accent" class="buttons"  (click)="Login()">כניסה</button>
+  <button mat-raised-button color="accent" class="buttons" (click)="SignUp()" >הרשמה</button>
+</div>
+</div>
+  <router-outlet></router-outlet>
+</body>

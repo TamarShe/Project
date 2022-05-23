@@ -1,0 +1,53 @@
+.mat-form-field
+{
+ text-align: right
+}
+
+input
+{
+  width: 45px;
+}
+
+div{
+  text-align: center;
+  font-size: small;
+}
+
+.orgs{
+  overflow-y: scroll;
+  height: 500px;
+}
+
+img
+{
+  width:100px;
+  margin-right: 45%;
+  margin-top: 7%;
+}
+
+.possibleOrgList
+{
+  margin-right:30%;
+  background-color: rgb(255, 254, 254);
+  width: 40%;
+  text-align: right;
+  //padding-right: 10px;
+}
+
+.disabledOrgList
+{
+  margin-right:30%;
+  background-color: rgb(255, 254, 254);
+  width: 40%;
+  text-align: right;
+  padding-right: 10px;
+  opacity: 70%;
+}
+
+.hr{
+  margin-right: 2%;
+  margin-left: 2%;
+
+}
+
+

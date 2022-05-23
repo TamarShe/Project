@@ -1,0 +1,44 @@
+<img src="../../../assets/dots.gif" *ngIf="loading"/>
+<form (submit)="UpdateManager(frm)" #frm="ngForm" *ngIf="!loading">
+  <div >
+    <mat-form-field >
+    <mat-label>תעודת זהות</mat-label>
+    <input name="id"  [(ngModel)]="manager.manager_Id" matInput ngDefaultControl  [disabled]="status=='update'" style="color: black;"/>
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>שם מלא</mat-label>
+    <input name="full_name" [(ngModel)]="manager.manager_full_name"  ngDefaultControl matInput/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>טלפון</mat-label>
+    <input name="phone" style="direction: ltr;"  [(ngModel)]="manager.manager_phone"  ngDefaultControl matInput/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>כתובת מייל</mat-label>
+    <input name="email" type="email" style="direction: ltr;" [(ngModel)]="manager.manager_email"  ngDefaultControl matInput/>
+    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')"> נא הכנס כתובת מייל תקינה  </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+חובה להכניס כתובת מייל תקינה    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>סיסמה לאתר</mat-label>
+    <input name="password" style="direction: ltr;"  [(ngModel)]="manager.manager_password"  ngDefaultControl matInput/>
+  </mat-form-field>
+  <mat-form-field  *ngIf="status=='update'" >
+    <mat-label> ארגון</mat-label>
+    <input name="orgCode" [(ngModel)]="org.org_name" disabled="true" style="color: black;" ngDefaultControl matInput/>
+  </mat-form-field>
+  <mat-form-field *ngIf="status=='add'">
+    <mat-label>ארגון</mat-label>
+    <input type="text" aria-label="מתנדב" matInput  placeholder="בחר ארגון" [matAutocomplete]="auto1">
+    <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete">
+      <mat-option *ngFor="let org of allOrgs" (onSelectionChange)="manager.manager_org_code=org.org_code" [value]="org.org_name">
+        {{org.org_name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <br>
+  <br>
+  <button mat-raised-button color="accent" style="font-size: larger;" type="submit">אישור</button>
+  </div>
+</form>

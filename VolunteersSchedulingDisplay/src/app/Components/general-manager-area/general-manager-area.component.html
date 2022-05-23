@@ -1,0 +1,116 @@
+<form #frm>
+  <div class="addNeedies">
+    <button mat-raised-button color="primary" class="upload-btn"(click)="matDialog.open(addUpdateOrganization)">
+      <mat-icon>add_circle</mat-icon>
+      הוסף ארגון
+      </button>
+      <br><br>
+      <button mat-raised-button color="primary" class="upload-btn"(click)="AddManager();matDialog.open(managerDetails);">
+        <mat-icon>add_circle</mat-icon>
+        הוסף מנהל
+        </button>
+    </div>
+  <div class="tableDiv" >
+    <div class="refresh">
+      <button  mat-icon-button color="primary" (click)="buildTable()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+      <label>רענן טבלה</label>
+    </div>
+      <br><br>
+    <img src="../../../assets/dots.gif" *ngIf="loading"/>
+    <div *ngIf="!loading">
+  <table>
+    <thead>
+        <tr>
+          <th>ערוך</th>
+          <th>מנהל ארגון</th>
+          <th>שם ארגון</th>
+          <th>מצע</th>
+          <th>האם צריך שיבוץ</th>
+          <th>תאריך תחילת הפעילות</th>
+          <th>תאריך סיום פעילות</th>
+          <th>גיל מינימלי להתנדבות</th>
+          <th>זמן ממוצע להתנדבות, בדקות</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let org of allOrgs">
+        <td [id]="org.org_code">
+          <button mat-icon-button color="primary" (click)="updateOrg(org.org_code);matDialog.open(addUpdateOrganization)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      <td [id]="org.org_code">
+        <button *ngIf="orgHasManager(org.org_code)" mat-icon-button color="primary" (click)="ShowOrgManagerDetails(org.org_code);matDialog.open(managerDetails);">
+        <mat-icon >person</mat-icon>
+      </button>
+      <button *ngIf="!orgHasManager(org.org_code)" mat-icon-button color="primary" (click)="AddManager();matDialog.open(managerDetails)">
+        <mat-icon *ngIf="!orgHasManager(org.org_code)">person_add</mat-icon>
+        </button>
+    </td>
+        <td>{{ org.org_name}}</td>
+        <td>{{ org.org_platform}}</td>
+        <td><mat-icon *ngIf="org.need_scheduling">check_outline</mat-icon></td>
+        <td>{{ org.activity_start_date  | date:'shortDate' }}</td>
+        <td>{{ org.activity_end_date  | date:'shortDate' }}</td>
+        <td>{{ org.org_min_age}}</td>
+        <td>{{ org.avg_volunteering_time}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
+  </form>
+
+  <ng-template #addUpdateOrganization>
+    <form #orgDetails (submit)="saveOrg(frm)">
+      <mat-form-field >
+        <mat-label>שם ארגון</mat-label>
+        <input name="orgName" [(ngModel)]="organization.org_name"  ngDefaultControl matInput/>
+      </mat-form-field>
+        <br><br>
+      <mat-form-field >
+        <mat-label>תקציר על פעילות הארגון</mat-label>
+        <textarea name="orgPlatform" [(ngModel)]="organization.org_platform"  ngDefaultControl matInput></textarea>
+      </mat-form-field>
+      <br><br>
+      <mat-form-field >
+        <mat-label>טווח תאריכי הפעילות</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker" >
+          <input name="start" matStartDate [(ngModel)]="organization.activity_start_date" formControlName="start" placeholder="תאריך התחלה">
+          <input name="end" matEndDate [(ngModel)]="organization.activity_end_date" formControlName="end"  placeholder="תאריך סיום" >
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">תאריך התחלה לא תקין</mat-error>
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">תאריך סיום לא תקין</mat-error>
+      </mat-form-field>
+      <br><br>
+      <mat-form-field >
+        <mat-label>זמן ממוצע להתנדבות, בדקות</mat-label>
+        <input type="number" name="AvgVolunteeringTime" [(ngModel)]="organization.avg_volunteering_time" ngDefaultControl matInput/>
+      </mat-form-field>
+      <br><br>
+      <mat-form-field >
+        <mat-label>גיל מינימלי להתנדבות</mat-label>
+        <input type="number" name="MinVolunteeringAge" [(ngModel)]="organization.org_min_age" ngDefaultControl matInput/>
+      </mat-form-field>
+        <br><br>
+        <mat-label>האם צריך שיבוץ  </mat-label>
+        <mat-checkbox name="needScheduling" [(ngModel)]="organization.need_scheduling"  ngDefaultControl matInput></mat-checkbox>
+      <br><br>
+      <button name="save" mat-raised-button color="accent" class="ok" type="submit" >אישור</button>
+      <br><br>
+    </form>
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close >סגור</button>
+    </div>
+  </ng-template>
+
+  <ng-template #managerDetails>
+    <router-outlet></router-outlet>
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close (click)="navigateBack()">סגור</button>
+    </div>
+  </ng-template>

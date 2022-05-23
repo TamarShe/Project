@@ -1,0 +1,38 @@
+<mat-stepper linear #stepper *ngIf="show" >
+  <mat-step  [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" style="text-align: center;font-size: large;margin-top: 9px;direction: rtl;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+      <ng-template matStepLabel>הכנס תעודת זהות וכתובת מייל</ng-template>
+      <mat-form-field>
+        <mat-label>תעודת זהות</mat-label>
+        <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error> -->
+        <input [(ngModel)]="userId" required  matInput ngDefaultControl [ngModelOptions]="{standalone: true}"/>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>כתובת מייל</mat-label>
+        <input [(ngModel)]="userEmail" type="email" required matInput ngDefaultControl [ngModelOptions]="{standalone: true}"/>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button color="accent" style="font-size: larger;"  (click)="sendEmail();stepper.next()" >אישור</button>
+      <br>
+      </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup" style="text-align: center;">
+      <ng-template matStepLabel>הקלד את הסיסמה הזמנית שנשלחה אליך</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>סיסמה</mat-label>
+        <input name="password" matInput ngDefaultControl  formControlName="secondCtrl" placeholder="סיסמה זמנית" required [(ngModel)]="TemporaryPasswordVertification"/>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button color="accent" style="font-size: larger;" (click)="vertifyPassword()">אישור</button>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="ThirdFormGroup">
+    <ng-template matStepLabel>מצוין! עכשיו השלם את פרטיך האישיים</ng-template>
+    <router-outlet></router-outlet>
+  </mat-step>

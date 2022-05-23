@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+body { margin: 0; font-family:'Varela Round', Arial, Helvetica, sans-serif !important;text-align: center;overflow-x: hidden;}
+@font-face {
+  font-family: "Varela Round";
+  src: url('../src/assets/font/VarelaRound-Regular.ttf') format("truetype");
+}
+html, body { height: 100%; }
+.mat-dialog-container {
+  overflow-x: hidden !important;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import  "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+
+

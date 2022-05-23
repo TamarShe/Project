@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="volunteers_scheduling_DBModelStoreContainer" CdmEntityContainer="volunteers_scheduling_DBEntities2">
+    <EntitySetMapping Name="area_in_org">
+      <EntityTypeMapping TypeName="volunteers_scheduling_DBModel.area_in_org">
+        <MappingFragment StoreEntitySet="area_in_org">
+          <ScalarProperty Name="area_in_org_code" ColumnName="area_in_org_code" />
+          <ScalarProperty Name="area_in_org_name" ColumnName="area_in_org_name" />
+          <ScalarProperty Name="area_in_org_platform" ColumnName="area_in_org_platform" />
+          <ScalarProperty Name="need_scheduling" ColumnName="need_scheduling" />
+          <ScalarProperty Name="org_code" ColumnName="org_code" />
+          <ScalarProperty Name="area_in_org_min_age" ColumnName="area_in_org_min_age" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="area_in_org_activity_time">
+      <EntityTypeMapping TypeName="volunteers_scheduling_DBModel.area_in_org_activity_time">
+        <MappingFragment StoreEntitySet="area_in_org_activity_time">
+          <ScalarProperty Name="volunteers_possible_time_code" ColumnName="volunteers_possible_time_code" />
+          <ScalarProperty Name="volunteering_details_code" ColumnName="volunteering_details_code" />
+          <ScalarProperty Name="time_slot_code" ColumnName="time_slot_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="manager">
+      <EntityTypeMapping TypeName="volunteers_scheduling_DBModel.manager">
+        <MappingFragment StoreEntitySet="manager">
+          <ScalarProperty Name="manager_Id" ColumnName="manager_Id" />
+          <ScalarProperty Name="manager_full_name" ColumnName="manager_full_name" />
+          <ScalarProperty Name="manager_phone" ColumnName="manager_phone" />
+          <ScalarProperty Name="manager_email" ColumnName="manager_email" />
+          <ScalarProperty Name="manager_password" ColumnName="manager_password" />
+          <ScalarProperty Name="manager_org_code" ColumnName="manager_org_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="neediness_details">
+      <EntityTypeMapping TypeName="volunteers_scheduling_DBModel.neediness_details">
+        <MappingFragment StoreEntitySet="neediness_details">
+          <ScalarProperty Name="neediness_details_code" ColumnName="neediness_details_code" />
+          <ScalarProperty Name="neediness_code" ColumnName="neediness_code" />
+          <ScalarProperty Name="area_in_org_code" ColumnName="area_in_org_code" />
+          <ScalarProperty Name="monthly_hours" ColumnName="monthly_hours" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="needy">
+      <EntityTypeMapping TypeName="volunteers_scheduling_DBModel.needy">
+        <MappingFragment StoreEntitySet="needy">
+          <ScalarProperty Name="needy_code" ColumnName="needy_code" />
+          <ScalarProperty Name="needy_full_name" ColumnName="needy_full_name" />
+          <ScalarProperty Name="needy_address" ColumnName="needy_address" />
+          <ScalarProperty Name="needy_phone" ColumnName="needy_phone" />
+          <ScalarProperty Name="needy_email" ColumnName="needy_email" />
+          <ScalarProperty Name="needy_password" ColumnName="needy_password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="needy_possible_time">
+      <EntityTypeMapping TypeName="volunteers_scheduling_DBModel.needy_possible_time">
+        <MappingFragment StoreEntitySet="needy_possible_time">
+          <ScalarProperty Name="needy_possible_time_code" ColumnName="needy_possible_time_code" />
+          <ScalarProperty Name="needy_details_code" ColumnName="needy_details_code" />
+          <ScalarProperty Name="time_slot_code" ColumnName="time_slot_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="organization">
+      <EntityTypeMapping TypeName="volunteers_scheduling_DBModel.organization">
+        <MappingFragment StoreEntitySet="organization">
+          <ScalarProperty Name="org_code" ColumnName="org_code" />
+          <ScalarProperty Name="org_name" ColumnName="org_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="schedule">
+      <EntityTypeMapping TypeName="volunteers_scheduling_DBModel.schedule">
+        <MappingFragment StoreEntitySet="schedule">
+          <ScalarProperty Name="schedule_code" ColumnName="schedule_code" />
+          <ScalarProperty Name="time_slot_code" ColumnName="time_slot_code" />
+          <ScalarProperty Name="volunteering_details_code" ColumnName="volunteering_details_code" />
+          <ScalarProperty Name="needy_details_code" ColumnName="needy_details_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="time_slot">
+      <EntityTypeMapping TypeName="volunteers_scheduling_DBModel.time_slot">
+        <MappingFragment StoreEntitySet="time_slot">
+          <ScalarProperty Name="time_slot_code" ColumnName="time_slot_code" />
+          <ScalarProperty Name="day_of_week" ColumnName="day_of_week" />
+          <ScalarProperty Name="start_at_date" ColumnName="start_at_date" />
+          <ScalarProperty Name="end_at_date" ColumnName="end_at_date" />
+          <ScalarProperty Name="start_at_hour" ColumnName="start_at_hour" />
+          <ScalarProperty Name="end_at_hour" ColumnName="end_at_hour" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="volunteer">
+      <EntityTypeMapping TypeName="volunteers_scheduling_DBModel.volunteer">
+        <MappingFragment StoreEntitySet="volunteer">
+          <ScalarProperty Name="volunteer_Id" ColumnName="volunteer_Id" />
+          <ScalarProperty Name="volunteer_full_name" ColumnName="volunteer_full_name" />
+          <ScalarProperty Name="volunteer_address" ColumnName="volunteer_address" />
+          <ScalarProperty Name="volunteer_phone" ColumnName="volunteer_phone" />
+          <ScalarProperty Name="volunteer_email" ColumnName="volunteer_email" />
+          <ScalarProperty Name="volunteer_password" ColumnName="volunteer_password" />
+          <ScalarProperty Name="volunteer_birth_date" ColumnName="volunteer_birth_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="volunteering_details">
+      <EntityTypeMapping TypeName="volunteers_scheduling_DBModel.volunteering_details">
+        <MappingFragment StoreEntitySet="volunteering_details">
+          <ScalarProperty Name="volunteering_details_code" ColumnName="volunteering_details_code" />
+          <ScalarProperty Name="volunteer_ID" ColumnName="volunteer_ID" />
+          <ScalarProperty Name="area_in_org_code" ColumnName="area_in_org_code" />
+          <ScalarProperty Name="monthly_hours" ColumnName="monthly_hours" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="volunteers_possible_time">
+      <EntityTypeMapping TypeName="volunteers_scheduling_DBModel.volunteers_possible_time">
+        <MappingFragment StoreEntitySet="volunteers_possible_time">
+          <ScalarProperty Name="volunteers_possible_time_code" ColumnName="volunteers_possible_time_code" />
+          <ScalarProperty Name="volunteering_details_code" ColumnName="volunteering_details_code" />
+          <ScalarProperty Name="time_slot_code" ColumnName="time_slot_code" />
+          <ScalarProperty Name="is_wanted" ColumnName="is_wanted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

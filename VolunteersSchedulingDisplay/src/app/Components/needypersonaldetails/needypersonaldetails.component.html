@@ -1,0 +1,36 @@
+<img src="../../../assets/dots.gif" *ngIf="loading"/>
+<form (submit)="Updateneedy(frm)" #frm="ngForm" *ngIf="!loading">
+<div >
+  <mat-form-field >
+    <mat-label>תעודת זהות</mat-label>
+    <input name="id"  [(ngModel)]="needy.needy_ID" ngDefaultControl matInput  style="color: black;"/>
+  </mat-form-field>
+<mat-form-field >
+  <mat-label>שם מלא</mat-label>
+  <input name="full_name" [(ngModel)]="needy.needy_full_name"  ngDefaultControl matInput/>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>טלפון</mat-label>
+  <input name="phone" style="direction: ltr;"  [(ngModel)]="needy.needy_phone"  ngDefaultControl matInput/>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>כתובת</mat-label>
+  <input  name="address" ngx-google-places-autocomplete type="text" matInput ngDefaultControl [matAutocomplete]="auto" [(ngModel)]="needy.needy_address">
+  <mat-autocomplete #auto="matAutocomplete">
+  </mat-autocomplete>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>כתובת מייל</mat-label>
+  <input name="email" style="direction: ltr;" [(ngModel)]="needy.needy_email" [formControl]="emailFormControl" ngDefaultControl matInput/>
+  <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')"> נא הכנס כתובת מייל תקינה  </mat-error>
+  <mat-error *ngIf="emailFormControl.hasError('required')">
+חובה להכניס כתובת מייל תקינה    </mat-error>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>סיסמה לאתר</mat-label>
+  <input name="password" style="direction: ltr;"  [(ngModel)]="needy.needy_password"  ngDefaultControl matInput/>
+</mat-form-field>
+<br>
+<button mat-raised-button color="accent" style="font-size: larger;" type="submit">אישור</button>
+</div>
+</form>

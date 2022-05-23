@@ -1,0 +1,39 @@
+<img src="../../../assets/dots.gif" *ngIf="loading"/>
+<div *ngIf="!loading">
+<div class="orgs">
+  <br>
+  <h2>באיזה ארגון תבחר להתנדב?</h2>
+    <ng-container *ngFor="let item of orgs">
+      <mat-list class="possibleOrgList">
+        <mat-selection-list>
+          <mat-list-option #listOption  (selectedChange)="updateSelections(item.org.org_code)" [value]="item.org.org_code">
+            <p><strong>{{ item.org.org_name }}</strong></p>
+            <hr class="hr">
+            {{item.org.org_platform}}
+          </mat-list-option>
+          <div *ngIf="item.isSelected">
+            <br><label>
+               *מספר שעות חודשיות רצוי
+              <input name="hours" mat-input type="number" required="true" min="0" max="500" [(ngModel)]="item.monthlyHours">
+            </label>
+          </div>
+          <hr>
+        </mat-selection-list>
+      </mat-list>
+  </ng-container>
+  <h3>שים לב - לאחר שתאשר את הרשמתך לארגון מסוים - תוכל לבטלה רק בעזרת מנהל הארגון</h3>
+  <button  mat-raised-button color="accent" (click)="signUpToAreaInOrg()">אישור</button>
+  <br><br><br><br>
+  <h3>ארגונים שאתה משובץ בהם / לא מתאימים בדרישות:</h3>
+  <ng-container *ngFor="let item of disabledOrgs">
+    <mat-list class="disabledOrgList" >
+      <mat-selection-list>
+          <p><strong>{{ item.org_name }}</strong></p>
+          <hr class="hr">{{item.org_platform}}
+        <hr>
+      </mat-selection-list>
+    </mat-list>
+</ng-container>
+ </div>
+</div>
+

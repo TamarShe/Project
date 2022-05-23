@@ -1,0 +1,83 @@
+.email
+{
+  text-align: center;
+  border-radius: 2%;
+  height: max-content;
+  border-color: black;
+  border-width: 2px;
+  position: relative;
+  width: max-content;
+}
+
+.mat-form-field
+{
+ text-align: right
+}
+
+.summary
+{
+  font-size: 12px !important;
+  text-align: center !important;
+  background-color: rgb(240, 240, 240) !important;
+  border-radius: 12px !important;
+  float: left !important;
+  border:none !important;
+  box-shadow: 0 4px 8px 0 rgba(72, 2, 235, 0.2), 0 6px 15px 0 rgba(255, 0, 0, 0.19) !important;
+  margin-left: 17% !important;
+  margin-top: 8px !important;
+  color: black !important;
+  font-style: bold !important;
+}
+
+.cal-cell-top{
+  height: 45px!important;
+}
+
+
+.calendarDiv{
+  margin: 7%;
+  height: 400px;
+  overflow-y: scroll;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.backAndNext{
+  margin-right: 7%;
+  margin-top:15px;
+}
+
+
+img
+{
+  width:100px;
+  margin-right: 45%;
+  margin-top: 7%;
+}
+
+
+.detailsDialog{
+  padding: 20px;
+  direction: rtl;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.textDetails{
+  height: 300px;
+  width:250px;
+  background-color: white;
+  text-align: center;
+  font-size: medium;
+  border-radius: 10px;
+  border:none !important;
+  box-shadow: 0 4px 8px 0 rgba(72, 2, 235, 0.2), 0 6px 15px 0 rgba(255, 0, 0, 0.19) !important;
+}
+
+.detailsSubject{
+background-color: white;
+border-radius: 10px;
+text-align: center;
+width:250px;
+font-size: 15px;
+}

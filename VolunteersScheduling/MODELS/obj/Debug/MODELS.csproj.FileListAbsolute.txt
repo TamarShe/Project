@@ -1,0 +1,38 @@
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\MODELS.dll.config
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\MODELS.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\MODELS.pdb
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\Newtonsoft.Json.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\System.Net.Http.Formatting.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\System.Web.Cors.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\System.Web.Http.Cors.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\System.Web.Http.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\Newtonsoft.Json.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\System.Net.Http.Formatting.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\System.Web.Http.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\System.Web.Http.Cors.xml
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\obj\Debug\MODELS.csproj.CoreCompileInputs.cache
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\obj\Debug\MODELS.csproj.CopyComplete
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\obj\Debug\MODELS.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\obj\Debug\MODELS.pdb
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\obj\Debug\MODELS.csprojAssemblyReference.cache
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\IronXL.dll
+D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\MODELS\bin\Debug\IronXL.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\MODELS.dll.config
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\MODELS.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\MODELS.pdb
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\IronXL.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\Newtonsoft.Json.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\System.Web.Cors.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\System.Web.Http.Cors.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\System.Web.Http.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\IronXL.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\Newtonsoft.Json.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\System.Web.Http.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\bin\Debug\System.Web.Http.Cors.xml
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\obj\Debug\MODELS.csproj.AssemblyReference.cache
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\obj\Debug\MODELS.csproj.CoreCompileInputs.cache
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\obj\Debug\MODELS.csproj.CopyComplete
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\obj\Debug\MODELS.dll
+C:\Users\IMOE001\Desktop\project\--master\VolunteersScheduling\MODELS\obj\Debug\MODELS.pdb

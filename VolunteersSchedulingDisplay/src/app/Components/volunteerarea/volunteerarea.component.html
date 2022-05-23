@@ -1,0 +1,7 @@
+<nav mat-tab-nav-bar mat-align-tabs="center" style="background-color: white;">
+  <a mat-tab-link class="tab" [routerLink]="['personal-details','update']" routerLinkActive="tabIn">פרטים אישיים</a>
+  <a mat-tab-link class="tab" [routerLink]="['volunteer-schedule']" routerLinkActive="tabIn">המערכת שלי</a>
+  <a mat-tab-link class="tab" [routerLink]="['constraints']" routerLinkActive="tabIn">העדפות</a>
+  <a mat-tab-link class="tab" [routerLink]="['signup-to-org']" routerLinkActive="tabIn">הרשם לארגון</a>
+</nav>
+<router-outlet></router-outlet>

@@ -1,0 +1,109 @@
+<form #frm>
+<div class="addNeedies">
+  <h2>הוספת חברים לארגון</h2>
+  <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">
+    <mat-icon>attach_file</mat-icon>
+  העלאת קובץ
+  </button>
+    <input type="file" style="display: none" (change)="upload(fileUpload)" #fileUpload accept="xlsx" >
+    <br>
+    <br>
+  <button mat-raised-button color="primary" class="upload-btn"(click)="matDialog.open(addNewNeedy);addNeedy()">
+    <mat-icon>add_circle</mat-icon>
+    הוספה ידנית
+    </button>
+    <br><br><br>
+    <div *ngIf="download">
+      קובץ הסיסמאות מוכן!
+      <br>
+    <button mat-raised-button color="basic" class="upload-btn" (click)="saveExcel()">
+      <mat-icon>download</mat-icon>
+      הורדה
+      </button></div>
+  </div>
+<div class="tableDiv" >
+  <div class="refresh">
+    <button  mat-icon-button color="primary" (click)="buildTable()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <label>רענן טבלה</label></div>
+    <br><br>
+  <img src="../../../assets/dots.gif" *ngIf="loading"/>
+  <div *ngIf="!loading">
+<table>
+  <thead>
+      <tr>
+        <th>ערוך</th>
+        <th>מחק</th>
+        <th>שם</th>
+        <th>כתובת</th>
+        <th>טלפון</th>
+        <th>מייל</th>
+        <th>זמן התנדבות לשבוע, בדקות</th>
+        <th>פרטים</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of dataSource">
+      <td [id]="row.needy.needy_ID">
+        <button mat-icon-button color="primary" (click)="matDialog.open(updateNeedy);EditFromDataSource(row);">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+      <td [id]="row.needy.needy_ID">
+        <button mat-icon-button color="primary" (click)="DeleteFromDataSource(row.needy.needy_ID)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+      <td>{{ row.needy.needy_full_name}}</td>
+      <td>{{ row.needy.needy_address }}</td>
+      <td>{{ row.needy.needy_phone }}</td>
+      <td>{{ row.needy.needy_email }}</td>
+      <td>{{ row.needinessDetails.weekly_hours }}</td>
+      <td>{{ row.needinessDetails.details }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</form>
+
+<ng-template #updateNeedy>
+  <form #ndForm class="needyDialog" type="submit" (submit)="editNeedinessDetails(ndForm)" >
+  <router-outlet></router-outlet>
+  <h3>פרטים טכניים</h3>
+  <mat-form-field>
+    <mat-label>מספר שעות חודשיות</mat-label>
+    <input name="number" [(ngModel)]="currentNeedinessDetails.weekly_hours"  ngDefaultControl matInput/>
+  </mat-form-field><br>
+  <mat-form-field>
+    <mat-label>פרטים</mat-label>
+    <textarea name="text" [(ngModel)]="currentNeedinessDetails.details"  ngDefaultControl matInput></textarea>
+  </mat-form-field>
+  <br>
+     <div mat-dialog-actions>
+      <button mat-raised-button color="accent" type="submit" >אישור</button>
+      <button mat-button mat-dialog-close>סגור</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #addNewNeedy>
+  <router-outlet></router-outlet>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>סגור</button>
+  </div>
+</ng-template>
+
+
+
+<table #t style="display: none;" id="excel-table">
+  <tr>
+    <th>תעודת זהות</th>
+    <th>סיסמה</th>
+  </tr>
+  <tr *ngFor="let item of table">
+    <td>{{item.ID}}</td>
+    <td>{{item.password}}</td>
+  </tr>
+</table>

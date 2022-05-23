@@ -1,0 +1,7 @@
+<nav mat-tab-nav-bar mat-align-tabs="center" style="background-color: white;">
+  <a mat-tab-link class="tab" [routerLink]="['manager-personal-details','update']" routerLinkActive="tabIn">פרטים אישיים</a>
+  <a mat-tab-link class="tab" [routerLink]="['schedule']" routerLinkActive="tabIn">המערכת שלי</a>
+  <a mat-tab-link class="tab" [routerLink]="['needies-managment']" routerLinkActive="tabIn">ניהול החברים בארגון</a>
+  <a mat-tab-link class="tab" [routerLink]="['volunteers-managment']" routerLinkActive="tabIn">ניהול המתנדבים בארגון</a>
+</nav>
+<router-outlet></router-outlet>

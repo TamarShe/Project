@@ -1,0 +1,141 @@
+.email
+{
+  text-align: center;
+  border-radius: 2%;
+  height: max-content;
+  border-color: black;
+  border-width: 2px;
+  position: relative;
+  width: max-content;
+}
+
+.mat-form-field
+{
+ text-align: right;
+ margin:10px;
+ direction: rtl;
+}
+
+.mat-option{
+  direction: rtl;
+  text-align: right;
+  font-size: 16px;
+  height:25px;
+}
+
+.comment{
+  font-size: 11px;
+}
+
+.mat-button{
+  margin:20px;
+}
+
+.summary
+{
+  font-size: 12px !important;
+  text-align: center !important;
+  // background-color: rgb(243, 243, 243) !important;
+  background-color: rgb(247, 247, 247) !important;
+  border-radius: 12px !important;
+  float: left !important;
+  // border:none !important;
+  border-color: rgb(189, 189, 189) !important;
+  border-width: 0.05px !important;
+  box-shadow: 0 4px 8px 0 rgba(72, 2, 235, 0.2), 0 6px 15px 0 rgba(255, 0, 0, 0.19) !important;
+  margin-left: 17% !important;
+  margin-top: 8px !important;
+  color: black !important;
+  font-style: bold !important;
+}
+
+.cal-cell-top{
+  height: 45px!important;
+}
+
+.buttons
+{
+  width:130px;
+}
+
+
+.calendarDiv{
+  float: left;
+  background-color: #ffffff;
+  height:440px;
+  width: 78%;
+  overflow-y: scroll;
+  margin-top: 3%;
+  margin-left: 3%;
+  float: left;
+  padding: 1%;
+}
+
+
+img
+{
+  width:100px;
+  text-align: center;
+  margin-right: 45%;
+  margin-top: 10%;
+}
+
+
+.detailsDialog{
+ padding: 20px;
+  direction: rtl;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.textDetails{
+  height: 300px;
+  width:250px;
+  background-color: white;
+  text-align: center;
+  font-size: medium;
+  border-radius: 10px;
+  border:none !important;
+  box-shadow: 0 4px 8px 0 rgba(72, 2, 235, 0.2), 0 6px 15px 0 rgba(255, 0, 0, 0.19) !important;
+}
+
+.popover{
+    height:200px;
+    width: 200px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+     background-color: white;
+     text-align: center;
+     font-size: small;
+     border-radius: 10px;
+     border:none !important;
+     box-shadow: 0 4px 8px 0 rgba(72, 2, 235, 0.2), 0 6px 15px 0 rgba(255, 0, 0, 0.19) !important;
+    // opacity: 100% !important;
+}
+
+.detailsSubject{
+background-color: white;
+border-radius: 10px;
+text-align: center;
+width:250px;
+font-size: 15px;
+}
+
+.buttonsDiv{
+  float: right;
+  padding: 25px;
+  padding-top: 3px;
+  text-align: center;
+  margin-top: 3%;
+  margin-right: 1%;
+}
+
+form{
+  background-color: transparent;
+}
+
+.addTimeSlotForm{
+  text-align: center;
+  margin:10px;
+  direction: rtl;
+}

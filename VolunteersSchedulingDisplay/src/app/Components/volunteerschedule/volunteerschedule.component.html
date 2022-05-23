@@ -1,0 +1,66 @@
+<img src="../../../assets/dots.gif" *ngIf="loading"/>
+
+<span *ngIf="!loading" >
+<div class="backAndNext">
+          <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+              הקודם
+          </div>
+          <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+              היום
+          </div>
+          <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+              הבא
+          </div>
+</div>
+
+<ng-template #messageToManager>
+  <div class="detailsDialog"><br>
+    <h2>עדכון למנהל הארגון על אילוץ חדש</h2><br>
+    <textarea disabled="true" class="detailsSubject"  [(ngModel)]="subject"></textarea>
+    <br>
+    <textarea class="textDetails" [(ngModel)]="content"></textarea>
+    <br><br>
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close>סגור</button>
+    <button mat-raised-button color="accent" (click)="saveAndSendToManager()">שלח</button>
+    </div>
+    </div>
+  </ng-template>
+
+<ng-template #detail>
+  <div class="detailsDialog">
+  <br>
+  <textarea  disabled="true" class="textDetails"  [(ngModel)]="details"></textarea>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="accent" (click)="displayContent();matDialog.open(messageToManager)">אני לא יכול</button>
+    <button mat-button mat-dialog-close>סגור</button>
+  </div>
+</div>
+</ng-template>
+
+<ng-template #event let-day="day" let-locale="locale">
+    <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}
+      <div class="cal-cell-top">
+          <ng-container *ngFor="let event of day.events">
+            <button class="summary" *ngIf="check(day.date,event)"  (click)="onDetailsClick(event,day);matDialog.open(detail)">
+            אצל {{event.needy.needy_full_name}}
+            <br>
+            {{event.timeSlot.start_at_hour.substring(0,5) +" - "+event.timeSlot.end_at_hour.substring(0,5)}}
+            </button>
+            </ng-container>
+          </div>
+  </span>
+</ng-template>
+
+<div class="calendarDiv">
+<mwl-calendar-month-view [cellTemplate]="event" [locale]="locale" [viewDate]="viewDate" [events]="events">
+    {{ viewDate | calendarDate:(view + 'ViewTitle'):'He' }}
+</mwl-calendar-month-view>
+</div>
+<!--
+<button type="button" class="btn btn-outline-secondary mr-2"
+[ngbPopover]="detail" popoverClass="popover" popoverTitle="Popover on top">
+Popover on top
+</button> -->
+
+

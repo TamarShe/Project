@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="volunteers_scheduling_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="manager">
+    <Key>
+      <PropertyRef Name="manager_ID" />
+    </Key>
+    <Property Name="manager_ID" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="manager_full_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="manager_phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="manager_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="manager_password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="manager_org_code" Type="Int32" Nullable="false" />
+    <Property Name="is_general_manager" Type="Boolean" />
+    <NavigationProperty Name="organization" Relationship="Self.FK__manager__manager__19FFD4FC" FromRole="manager" ToRole="organization" />
+  </EntityType>
+  <EntityType Name="neediness_details">
+    <Key>
+      <PropertyRef Name="neediness_details_code" />
+    </Key>
+    <Property Name="neediness_details_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="needy_ID" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="org_code" Type="Int32" Nullable="false" />
+    <Property Name="details" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="needy" Relationship="Self.FK__neediness__needy__247D636F" FromRole="neediness_details" ToRole="needy" />
+    <NavigationProperty Name="organization" Relationship="Self.FK__neediness__org_c__257187A8" FromRole="neediness_details" ToRole="organization" />
+    <NavigationProperty Name="needy_possible_time" Relationship="Self.FK__needy_pos__needy__34B3CB38" FromRole="neediness_details" ToRole="needy_possible_time" />
+    <NavigationProperty Name="schedules" Relationship="Self.FK__schedule__needin__3C54ED00" FromRole="neediness_details" ToRole="schedule" />
+    <Property Name="weekly_hours" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="needy">
+    <Key>
+      <PropertyRef Name="needy_ID" />
+    </Key>
+    <Property Name="needy_ID" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="needy_full_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="needy_address" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="needy_phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="needy_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="needy_password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="neediness_details" Relationship="Self.FK__neediness__needy__247D636F" FromRole="needy" ToRole="neediness_details" />
+  </EntityType>
+  <EntityType Name="needy_possible_time">
+    <Key>
+      <PropertyRef Name="needy_possible_time_code" />
+    </Key>
+    <Property Name="needy_possible_time_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="needy_details_code" Type="Int32" Nullable="false" />
+    <Property Name="time_slot_code" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="neediness_details" Relationship="Self.FK__needy_pos__needy__34B3CB38" FromRole="needy_possible_time" ToRole="neediness_details" />
+    <NavigationProperty Name="time_slot" Relationship="Self.FK__needy_pos__time___35A7EF71" FromRole="needy_possible_time" ToRole="time_slot" />
+  </EntityType>
+  <EntityType Name="organization">
+    <Key>
+      <PropertyRef Name="org_code" />
+    </Key>
+    <Property Name="org_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="org_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="org_platform" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="need_scheduling" Type="Boolean" Nullable="false" />
+    <Property Name="org_min_age" Type="Int32" Nullable="false" />
+    <Property Name="activity_start_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="activity_end_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="avg_volunteering_time" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="managers" Relationship="Self.FK__manager__manager__19FFD4FC" FromRole="organization" ToRole="manager" />
+    <NavigationProperty Name="neediness_details" Relationship="Self.FK__neediness__org_c__257187A8" FromRole="organization" ToRole="neediness_details" />
+    <NavigationProperty Name="volunteering_details" Relationship="Self.FK__volunteer__org_c__1FB8AE52" FromRole="organization" ToRole="volunteering_details" />
+  </EntityType>
+  <EntityType Name="schedule">
+    <Key>
+      <PropertyRef Name="schedule_code" />
+    </Key>
+    <Property Name="schedule_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="time_slot_code" Type="Int32" Nullable="false" />
+    <Property Name="volunteering_details_code" Type="Int32" Nullable="false" />
+    <Property Name="neediness_details_code" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="neediness_details" Relationship="Self.FK__schedule__needin__3C54ED00" FromRole="schedule" ToRole="neediness_details" />
+    <NavigationProperty Name="time_slot" Relationship="Self.FK__schedule__time_s__3A6CA48E" FromRole="schedule" ToRole="time_slot" />
+    <NavigationProperty Name="volunteering_details" Relationship="Self.FK__schedule__volunt__3B60C8C7" FromRole="schedule" ToRole="volunteering_details" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="time_slot">
+    <Key>
+      <PropertyRef Name="time_slot_code" />
+    </Key>
+    <Property Name="time_slot_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="day_of_week" Type="Int32" Nullable="false" />
+    <Property Name="start_at_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="end_at_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="start_at_hour" Type="Time" Nullable="false" Precision="0" />
+    <Property Name="end_at_hour" Type="Time" Nullable="false" Precision="0" />
+    <NavigationProperty Name="needy_possible_time" Relationship="Self.FK__needy_pos__time___35A7EF71" FromRole="time_slot" ToRole="needy_possible_time" />
+    <NavigationProperty Name="schedules" Relationship="Self.FK__schedule__time_s__3A6CA48E" FromRole="time_slot" ToRole="schedule" />
+    <NavigationProperty Name="volunteer_possible_time" Relationship="Self.FK__volunteer__time___2FEF161B" FromRole="time_slot" ToRole="volunteer_possible_time" />
+  </EntityType>
+  <EntityType Name="volunteer">
+    <Key>
+      <PropertyRef Name="volunteer_ID" />
+    </Key>
+    <Property Name="volunteer_ID" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="volunteer_full_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="volunteer_address" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="volunteer_phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="volunteer_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="volunteer_password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="volunteer_birth_date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="volunteering_details" Relationship="Self.FK__volunteer__volun__1EC48A19" FromRole="volunteer" ToRole="volunteering_details" />
+  </EntityType>
+  <EntityType Name="volunteer_possible_time">
+    <Key>
+      <PropertyRef Name="volunteers_possible_time_code" />
+    </Key>
+    <Property Name="volunteers_possible_time_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="volunteering_details_code" Type="Int32" Nullable="false" />
+    <Property Name="time_slot_code" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="time_slot" Relationship="Self.FK__volunteer__time___2FEF161B" FromRole="volunteer_possible_time" ToRole="time_slot" />
+    <NavigationProperty Name="volunteering_details" Relationship="Self.FK__volunteer__volun__2EFAF1E2" FromRole="volunteer_possible_time" ToRole="volunteering_details" />
+  </EntityType>
+  <EntityType Name="volunteering_details">
+    <Key>
+      <PropertyRef Name="volunteering_details_code" />
+    </Key>
+    <Property Name="volunteering_details_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="volunteer_ID" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="org_code" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="organization" Relationship="Self.FK__volunteer__org_c__1FB8AE52" FromRole="volunteering_details" ToRole="organization" />
+    <NavigationProperty Name="schedules" Relationship="Self.FK__schedule__volunt__3B60C8C7" FromRole="volunteering_details" ToRole="schedule" />
+    <NavigationProperty Name="volunteer" Relationship="Self.FK__volunteer__volun__1EC48A19" FromRole="volunteering_details" ToRole="volunteer" />
+    <NavigationProperty Name="volunteer_possible_time" Relationship="Self.FK__volunteer__volun__2EFAF1E2" FromRole="volunteering_details" ToRole="volunteer_possible_time" />
+    <Property Name="weekly_hours" Type="Double" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__manager__manager__19FFD4FC">
+    <End Role="organization" Type="Self.organization" Multiplicity="1" />
+    <End Role="manager" Type="Self.manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="organization">
+        <PropertyRef Name="org_code" />
+      </Principal>
+      <Dependent Role="manager">
+        <PropertyRef Name="manager_org_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__neediness__needy__247D636F">
+    <End Role="needy" Type="Self.needy" Multiplicity="1" />
+    <End Role="neediness_details" Type="Self.neediness_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="needy">
+        <PropertyRef Name="needy_ID" />
+      </Principal>
+      <Dependent Role="neediness_details">
+        <PropertyRef Name="needy_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__neediness__org_c__257187A8">
+    <End Role="organization" Type="Self.organization" Multiplicity="1" />
+    <End Role="neediness_details" Type="Self.neediness_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="organization">
+        <PropertyRef Name="org_code" />
+      </Principal>
+      <Dependent Role="neediness_details">
+        <PropertyRef Name="org_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__needy_pos__needy__34B3CB38">
+    <End Role="neediness_details" Type="Self.neediness_details" Multiplicity="1" />
+    <End Role="needy_possible_time" Type="Self.needy_possible_time" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="neediness_details">
+        <PropertyRef Name="neediness_details_code" />
+      </Principal>
+      <Dependent Role="needy_possible_time">
+        <PropertyRef Name="needy_details_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__schedule__needin__3C54ED00">
+    <End Role="neediness_details" Type="Self.neediness_details" Multiplicity="1" />
+    <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="neediness_details">
+        <PropertyRef Name="neediness_details_code" />
+      </Principal>
+      <Dependent Role="schedule">
+        <PropertyRef Name="neediness_details_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__needy_pos__time___35A7EF71">
+    <End Role="time_slot" Type="Self.time_slot" Multiplicity="1" />
+    <End Role="needy_possible_time" Type="Self.needy_possible_time" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="time_slot">
+        <PropertyRef Name="time_slot_code" />
+      </Principal>
+      <Dependent Role="needy_possible_time">
+        <PropertyRef Name="time_slot_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__volunteer__org_c__1FB8AE52">
+    <End Role="organization" Type="Self.organization" Multiplicity="1" />
+    <End Role="volunteering_details" Type="Self.volunteering_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="organization">
+        <PropertyRef Name="org_code" />
+      </Principal>
+      <Dependent Role="volunteering_details">
+        <PropertyRef Name="org_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__schedule__time_s__3A6CA48E">
+    <End Role="time_slot" Type="Self.time_slot" Multiplicity="1" />
+    <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="time_slot">
+        <PropertyRef Name="time_slot_code" />
+      </Principal>
+      <Dependent Role="schedule">
+        <PropertyRef Name="time_slot_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__schedule__volunt__3B60C8C7">
+    <End Role="volunteering_details" Type="Self.volunteering_details" Multiplicity="1" />
+    <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="volunteering_details">
+        <PropertyRef Name="volunteering_details_code" />
+      </Principal>
+      <Dependent Role="schedule">
+        <PropertyRef Name="volunteering_details_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__volunteer__time___2FEF161B">
+    <End Role="time_slot" Type="Self.time_slot" Multiplicity="1" />
+    <End Role="volunteer_possible_time" Type="Self.volunteer_possible_time" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="time_slot">
+        <PropertyRef Name="time_slot_code" />
+      </Principal>
+      <Dependent Role="volunteer_possible_time">
+        <PropertyRef Name="time_slot_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__volunteer__volun__1EC48A19">
+    <End Role="volunteer" Type="Self.volunteer" Multiplicity="1" />
+    <End Role="volunteering_details" Type="Self.volunteering_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="volunteer">
+        <PropertyRef Name="volunteer_ID" />
+      </Principal>
+      <Dependent Role="volunteering_details">
+        <PropertyRef Name="volunteer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__volunteer__volun__2EFAF1E2">
+    <End Role="volunteering_details" Type="Self.volunteering_details" Multiplicity="1" />
+    <End Role="volunteer_possible_time" Type="Self.volunteer_possible_time" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="volunteering_details">
+        <PropertyRef Name="volunteering_details_code" />
+      </Principal>
+      <Dependent Role="volunteer_possible_time">
+        <PropertyRef Name="volunteering_details_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="volunteers_scheduling_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="managers" EntityType="Self.manager" />
+    <EntitySet Name="neediness_details" EntityType="Self.neediness_details" />
+    <EntitySet Name="needies" EntityType="Self.needy" />
+    <EntitySet Name="needy_possible_time" EntityType="Self.needy_possible_time" />
+    <EntitySet Name="organizations" EntityType="Self.organization" />
+    <EntitySet Name="schedules" EntityType="Self.schedule" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="time_slot" EntityType="Self.time_slot" />
+    <EntitySet Name="volunteers" EntityType="Self.volunteer" />
+    <EntitySet Name="volunteer_possible_time" EntityType="Self.volunteer_possible_time" />
+    <EntitySet Name="volunteering_details" EntityType="Self.volunteering_details" />
+    <AssociationSet Name="FK__manager__manager__19FFD4FC" Association="Self.FK__manager__manager__19FFD4FC">
+      <End Role="organization" EntitySet="organizations" />
+      <End Role="manager" EntitySet="managers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__neediness__needy__247D636F" Association="Self.FK__neediness__needy__247D636F">
+      <End Role="needy" EntitySet="needies" />
+      <End Role="neediness_details" EntitySet="neediness_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__neediness__org_c__257187A8" Association="Self.FK__neediness__org_c__257187A8">
+      <End Role="organization" EntitySet="organizations" />
+      <End Role="neediness_details" EntitySet="neediness_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__needy_pos__needy__34B3CB38" Association="Self.FK__needy_pos__needy__34B3CB38">
+      <End Role="neediness_details" EntitySet="neediness_details" />
+      <End Role="needy_possible_time" EntitySet="needy_possible_time" />
+    </AssociationSet>
+    <AssociationSet Name="FK__schedule__needin__3C54ED00" Association="Self.FK__schedule__needin__3C54ED00">
+      <End Role="neediness_details" EntitySet="neediness_details" />
+      <End Role="schedule" EntitySet="schedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK__needy_pos__time___35A7EF71" Association="Self.FK__needy_pos__time___35A7EF71">
+      <End Role="time_slot" EntitySet="time_slot" />
+      <End Role="needy_possible_time" EntitySet="needy_possible_time" />
+    </AssociationSet>
+    <AssociationSet Name="FK__volunteer__org_c__1FB8AE52" Association="Self.FK__volunteer__org_c__1FB8AE52">
+      <End Role="organization" EntitySet="organizations" />
+      <End Role="volunteering_details" EntitySet="volunteering_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__schedule__time_s__3A6CA48E" Association="Self.FK__schedule__time_s__3A6CA48E">
+      <End Role="time_slot" EntitySet="time_slot" />
+      <End Role="schedule" EntitySet="schedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK__schedule__volunt__3B60C8C7" Association="Self.FK__schedule__volunt__3B60C8C7">
+      <End Role="volunteering_details" EntitySet="volunteering_details" />
+      <End Role="schedule" EntitySet="schedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK__volunteer__time___2FEF161B" Association="Self.FK__volunteer__time___2FEF161B">
+      <End Role="time_slot" EntitySet="time_slot" />
+      <End Role="volunteer_possible_time" EntitySet="volunteer_possible_time" />
+    </AssociationSet>
+    <AssociationSet Name="FK__volunteer__volun__1EC48A19" Association="Self.FK__volunteer__volun__1EC48A19">
+      <End Role="volunteer" EntitySet="volunteers" />
+      <End Role="volunteering_details" EntitySet="volunteering_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__volunteer__volun__2EFAF1E2" Association="Self.FK__volunteer__volun__2EFAF1E2">
+      <End Role="volunteering_details" EntitySet="volunteering_details" />
+      <End Role="volunteer_possible_time" EntitySet="volunteer_possible_time" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(volunteers_scheduling_DBModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(volunteers_scheduling_DBModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

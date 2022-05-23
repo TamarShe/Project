@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DAL.volunteers_scheduling_DBEntities">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAABAAAEAAAAAAAAgCABAAcAQAAABAAAABAAAAgAA=</HashCode>
+      <FileName>DB.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.hour" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAABAAAAAACAAAABAAAAAAAAA=</HashCode>
+      <FileName>hour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.manager" Collapsed="true">
+    <Position X="4.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAgAIAAAIAAAAAAgAAACAAA=</HashCode>
+      <FileName>manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.neediness_details" Collapsed="true">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABEAAAAAAAAAAAQAAAAAAAAAAAhBAAgAhAAAAAAA=</HashCode>
+      <FileName>neediness_details.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.needy" Collapsed="true">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAIAAAAAAACAAAAAAAAAAgACgAEAAAAAAAAAAA=</HashCode>
+      <FileName>needy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.needy_possible_time" Collapsed="true">
+    <Position X="2.5" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EACAAAAAAAgAAAAAAAAABBAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>needy_possible_time.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.organization" Collapsed="true">
+    <Position X="2.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACABAEAAAAAACAAAAAAgAAAYCAAAAAAAAAAEDAAAAA=</HashCode>
+      <FileName>organization.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.schedule" Collapsed="true">
+    <Position X="4.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCAAEAAAAgAAAAAAAAAABAAQAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>schedule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.time_slot" Collapsed="true">
+    <Position X="2.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAgAAAAAQAgAAAAAAAQAAABAAAATACAAIAA=</HashCode>
+      <FileName>time_slot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.volunteer" Collapsed="true">
+    <Position X="4.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABABAAAAAAAAAAAAABAAAAQAAAIAAABAAEAAAgAAA=</HashCode>
+      <FileName>volunteer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.volunteer_possible_time" Collapsed="true">
+    <Position X="4.25" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAgAAAAAAAEAABAAQAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>volunteer_possible_time.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.volunteering_details" Collapsed="true">
+    <Position X="2.5" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAABBAAAAAAAQAAAAAAAAAAAAYAAABAAgAgAAAAAAA=</HashCode>
+      <FileName>volunteering_details.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.DBConnection">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="DAL.DBConnection.ExecuteActions">
+        <TypeIdentifier>
+          <NewMemberFileName>DBConnection.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DBConnection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

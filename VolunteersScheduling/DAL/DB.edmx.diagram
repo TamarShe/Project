@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9c484afcaf8e407080fb111eb46ed08f" Name="Diagram1">
+        <EntityTypeShape EntityType="volunteers_scheduling_DBModel.hour" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="volunteers_scheduling_DBModel.manager" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="volunteers_scheduling_DBModel.neediness_details" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="volunteers_scheduling_DBModel.needy" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="volunteers_scheduling_DBModel.needy_possible_time" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="volunteers_scheduling_DBModel.organization" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="volunteers_scheduling_DBModel.schedule" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="volunteers_scheduling_DBModel.time_slot" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="volunteers_scheduling_DBModel.volunteer" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="volunteers_scheduling_DBModel.volunteer_possible_time" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="volunteers_scheduling_DBModel.volunteering_details" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__time_slot__end_a__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__time_slot__start__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__manager__manager__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__neediness__needy__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__neediness__org_c__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__needy_pos__needy__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__schedule__needin__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__needy_pos__time___619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__volunteer__org_c__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__schedule__time_s__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__schedule__volunt__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__volunteer__time___5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__volunteer__volun__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="volunteers_scheduling_DBModel.FK__volunteer__volun__5CD6CB2B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
