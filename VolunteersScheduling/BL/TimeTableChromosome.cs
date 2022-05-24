@@ -15,6 +15,7 @@ namespace BL
         private readonly DBConnection DBCon = new DBConnection();
         public List<TimeSlotProperties> timeSlotsPropertiesList = new List<TimeSlotProperties>();
         private int orgCode;
+        static Random Random = new Random();
 
         List<organization> listOfOrganizations;
         List<volunteer> listOfVolunteers;
@@ -25,8 +26,7 @@ namespace BL
         List<needy_possible_time> listOfNeediesPossibleTimes;
         List<time_slot> listOfTimeSlots;
         List<hour> listOfHours;
-
-        static Random Random = new Random();
+        
 
         public TimeTableChromosome(DBConnection db, int orgCode)
         {
@@ -209,15 +209,13 @@ namespace BL
 
                     foreach (var volunteer in volunteersOfNeedy)
                     {
-                        //להחליט פה על תנאי  יותר הגיוני כמה להוריד על זה כי זה מגיע בדקות
-                        score -= GoogleMaps.GetDistanceInMinutes(volunteer.volunteer_address, item.needy.needy_address).Result;
+                        score -= (GoogleMaps.GetDistanceInMinutes(volunteer.volunteer_address, item.needy.needy_address).Result-10);
                     }
                 }
 
                 #endregion
 
                 #region בדיקה של מספר שעות מתאים למתנדב
-                //בדיקה של מספר שעות מתאים למתנדב
                 foreach (var item in volunteeringDetailsInOrg)
                 {
                     currentVolunteerHours = (values.FindAll(slot => slot.volunteer.volunteer_ID == item.volunteer_ID).ToList().Count()*(item.organization.avg_volunteering_time))/60;
@@ -255,8 +253,6 @@ namespace BL
                                         .Where(slot => slot.time.start_at_hour == current.time.start_at_hour
                                                   || slot.time.start_at_hour <= current.time.start_at_hour && slot.time.end_at_hour >= current.time.end_at_hour
                                                   || current.time.start_at_hour <= slot.time.start_at_hour && current.time.end_at_hour >= slot.time.end_at_hour
-                                        //|| Math.Abs((current.time.end_at_hour-slot.time.start_at_hour).TotalMinutes)<60
-                                        //|| Math.Abs((current.time.start_at_hour - slot.time.end_at_hour).TotalMinutes) < 60)
                                         ).ToList());
 
                 foreach (var item in values)
@@ -265,14 +261,13 @@ namespace BL
                     listOfAllOverLaps.AddRange(overLaps);
                 }
 
-                //רשימת כל החפיפות בלוח כולל השיבוץ החדש בלי כפילויות
+                //רשימת כל החפיפות בלוח, כולל השיבוץ החדש ובלי כפילויות
                 listOfAllOverLaps = listOfAllOverLaps.Distinct().ToList();
 
                 score -= listOfAllOverLaps.Count() - 1;
                 #endregion
 
                 #region בדיקה שאין למתנדב יותר מ 3 התנדבויות ליום
-                //להוסיף כאן איזה בדיקה על תאריכים
                 volunteeringDetailsInOrg = dbCon.GetDbSet<volunteering_details>();
                 var dailyVolunteeringsCounter = 0;
                 var slotsOfVolunteer = new List<TimeSlotProperties>();
@@ -288,7 +283,7 @@ namespace BL
 
                     if (dailyVolunteeringsCounter > 3)
                     {
-                        score -= dailyVolunteeringsCounter;
+                        score -= (dailyVolunteeringsCounter-3);
                     }
                 }
                 #endregion

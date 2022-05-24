@@ -14,14 +14,12 @@ namespace BL
 {
     public class ReadExcel
     {
-        public int MyProperty { get; set; }
         public Excel.Application xlApp { get; set; }
         public Excel.Workbook xlWorkBook { get; set; }
         public Excel.Worksheet xlWorkSheet { get; set; }
         public Dictionary<string, List<string>> words { get; set; }
         public Dictionary<string, List<string>> details { get; set; }
         public Dictionary<string, int> DictionaryColumns { get; set; }
-        public Dictionary<string, string> valuesString { get; set; }
         //פתיחת קובץ האקסל 
         public void open(string path)
         {
@@ -45,11 +43,11 @@ namespace BL
         public void FillWordsForVolunteer()
         {
 
-            using (StreamReader sr = File.OpenText((@"D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\Volunteers.txt")))
+            using (StreamReader sr = File.OpenText((@"C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\BL\Volunteers.txt")))
             {
                 words = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(sr.ReadToEnd());
             }
-            using (StreamReader sr = File.OpenText((@"D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\VolunteeringDetails.txt")))
+            using (StreamReader sr = File.OpenText((@"C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\BL\VolunteeringDetails.txt")))
             {
                 details=JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(sr.ReadToEnd());
             }
@@ -58,11 +56,11 @@ namespace BL
         public void FillWordsForNeedy()
         {
 
-            using (StreamReader sr = File.OpenText((@"D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\Needies.txt")))
+            using (StreamReader sr = File.OpenText((@"C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\BL\Needies.txt")))
             {
                 words = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(sr.ReadToEnd());
             }
-            using (StreamReader sr = File.OpenText((@"D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\BL\NeedinessDetails.txt")))
+            using (StreamReader sr = File.OpenText((@"C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\BL\NeedinessDetails.txt")))
             {
                 details = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(sr.ReadToEnd());
 

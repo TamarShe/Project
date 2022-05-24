@@ -15,12 +15,6 @@ namespace BL
         {
             dbCon = new DBConnection();
         }
-        public enum Result
-        {
-            IncorrectDetails,
-            NotFound,
-            Found
-        }
         public List<T> GetDbSet<T>() where T : class
         {
             return dbCon.GetDbSet<T>();

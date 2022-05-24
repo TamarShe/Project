@@ -39,10 +39,14 @@ export class PersonaldetailsComponent {
   @ViewChild ('address', {static:false}) address!: HTMLInputElement;
 
   constructor(private volunteeringDetailsService:VolunteeringDetailsService,private userService:UserService,private managerService:ManagerService,private formBuilder:FormBuilder,private router:Router,private route:ActivatedRoute,private volunteerService:VolunteerService,private _snackBar:MatSnackBar){
+    this.route.paramMap.subscribe(a=>console.log(a))
     this.route.paramMap.subscribe(a=>{
       this.status=a.get("status");
       if(this.status=="add")
       {
+        if(a.get("userid")!=""){
+         this.userID=a.get("userid");}
+           else{
          this.route.parent?.parent?.paramMap.subscribe(b=>
           {
             var n=b.get("userid");
@@ -51,7 +55,7 @@ export class PersonaldetailsComponent {
             {
                this.manager.manager_org_code=c;
             })}
-          })
+          })}
       }
       else
       {
@@ -70,7 +74,7 @@ export class PersonaldetailsComponent {
     });
 
     setTimeout(() => {
-      if(this.userID!=null && this.showed==false){
+      if(this.userID!=null){
         this.volunteer.volunteer_ID=this.userID.toString();
         if(this.status=="update")
           {

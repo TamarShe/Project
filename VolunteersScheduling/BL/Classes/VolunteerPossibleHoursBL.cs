@@ -100,7 +100,7 @@ namespace BL.Classes
         }
         #endregion
 
-        public bool GetConflicts(int volunteeringDetailsCode)
+        public List<int> GetConflicts(int volunteeringDetailsCode)
         {
             bool findConflicts = false;
             ScheduleBL scheduleBL = new ScheduleBL();

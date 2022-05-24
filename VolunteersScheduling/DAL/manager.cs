@@ -20,7 +20,7 @@ namespace DAL
         public string manager_email { get; set; }
         public string manager_password { get; set; }
         public int manager_org_code { get; set; }
-        public bool is_general_manager { get; set; }
+        public Nullable<bool> is_general_manager { get; set; }
     
         public virtual organization organization { get; set; }
     }

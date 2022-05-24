@@ -24,67 +24,10 @@ namespace BL.Classes
             return listOfHours;
         }
 
-        public int InsertHour(HourModel Hour1)
-        {
-            if (listOfHours.Find(v => v.hour_code == Hour1.hour_code) == null)
-                try
-                {
-                    dbCon.Execute<hour>(ConvertHourToEF(Hour1),
-                    DBConnection.ExecuteActions.Insert);
-                    listOfHours = ConvertListToModel(dbCon.GetDbSet<hour>().ToList());
-                    return listOfHours.First(v => v.hour_code == Hour1.hour_code).hour_code;
-                }
-                catch (Exception ex)
-                {
-                    return 0;
-                }
-            return 0;
-        }
-
-        public int UpdateHour(HourModel Hour1)
-        {
-            if (listOfHours.Find(v => v.hour_code == Hour1.hour_code) != null)
-                try
-                {
-                    dbCon.Execute<hour>(ConvertHourToEF(Hour1),
-                    DBConnection.ExecuteActions.Update);
-                    listOfHours = ConvertListToModel(dbCon.GetDbSet<hour>().ToList());
-                    return listOfHours.First(v => v.hour_code == Hour1.hour_code).hour_code;
-                }
-                catch (Exception ex)
-                {
-                    return 0;
-                }
-            return 0;
-        }
-
-        public bool DeleteHour(int hourCode)
-        {
-            HourModel Hour1 = listOfHours.First(Hour => Hour.hour_code == hourCode);
-            if (Hour1 != null)
-                try
-                {
-                    dbCon.Execute<hour>(ConvertHourToEF(Hour1),
-                    DBConnection.ExecuteActions.Delete);
-                    listOfHours = ConvertListToModel(dbCon.GetDbSet<hour>().ToList());
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-            return false;
-        }
+  
 
         #region convert functions
-        public static hour ConvertHourToEF(MODELS.HourModel v)
-        {
-            return new hour
-            {
-                hour_code = v.hour_code,
-                at_hour = v.at_hour,
-            };
-        }
+
         public static MODELS.HourModel ConvertHourToModel(hour v)
         {
             return new MODELS.HourModel

@@ -17,12 +17,14 @@ namespace DAL
                 return volunteers_scheduling_DBEntities.GetDbSet<T>().ToList();
             }
         }
+
         public enum ExecuteActions
         {
             Insert,
             Update,
             Delete
         }
+
         public void Execute<T>(T entity, ExecuteActions exAction) where T : class
         {
             using (volunteers_scheduling_DBEntities volunteers_scheduling_DBEntities = new volunteers_scheduling_DBEntities())
@@ -46,10 +48,6 @@ namespace DAL
                 }
                 volunteers_scheduling_DBEntities.SaveChanges();
             }
-
         }
-
-
-
     }
 }

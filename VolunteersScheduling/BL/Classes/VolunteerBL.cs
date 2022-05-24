@@ -38,7 +38,7 @@ namespace BL.Classes
                 {
                     return "";
                 }
-            return "";
+            return volunteer1.volunteer_ID;
         } 
 
         public string UpdateVolunteer(VolunteerModel volunteer1)
@@ -114,7 +114,6 @@ namespace BL.Classes
 
         public string[,] InsertVolunteersFromExcelFile(string path, int orgCode)
         {
-            Dictionary<string, List<string>> words;
             ReadExcel excel = new ReadExcel();
             int mone = 0;
             excel.open(path);
@@ -136,7 +135,6 @@ namespace BL.Classes
                     newVolunteer.volunteer_address = (excel.xlWorkSheet.UsedRange.Cells[rCnt/*שורה*/, excel.DictionaryColumns["volunteer_address"]] as Microsoft.Office.Interop.Excel.Range).Value2.ToString();
                     newVolunteer.volunteer_email = (excel.xlWorkSheet.UsedRange.Cells[rCnt/*שורה*/, excel.DictionaryColumns["volunteer_email"]] as Microsoft.Office.Interop.Excel.Range).Value2.ToString();
                     newVolunteer.volunteer_phone = (excel.xlWorkSheet.UsedRange.Cells[rCnt/*שורה*/, excel.DictionaryColumns["volunteer_phone"]] as Microsoft.Office.Interop.Excel.Range).Value2.ToString();
-               //     newVolunteer.volunteer_birth_date = (excel.xlWorkSheet.UsedRange.Cells[rCnt/*שורה*/, excel.DictionaryColumns["volunteer_birth_date"]] as Microsoft.Office.Interop.Excel.Range).Value2.ToString();
                     newVolunteer.volunteer_birth_date = new DateTime();
                     while (this.CheckIfPasswordIsFree(newVolunteer.volunteer_ID, randomPassword.ToString()))
                     {

@@ -110,7 +110,6 @@
     <Compile Include="TimeSlotProperties.cs" />
     <Compile Include="TimeTableChromosome.cs" />
     <Compile Include="VolunteersSchedulingBL.cs" />
-    <Compile Include="WriteToExcel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
@@ -127,6 +126,8 @@
     <None Include="BLDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
+    <None Include="ClassDiagram3.cd" />
+    <None Include="ClassDiagram4.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,8 +1,6 @@
 <form #frm (submit)="loading=true;saveConstraints(frm);loading=false">
 
   <div class="addConstraintsDiv">
-
-    <br>
     <mat-form-field>
       <mat-label>בחר ארגון</mat-label>
       <mat-select>
@@ -11,21 +9,69 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <br><br>
+    <br>
 
-    <mat-form-field>
-      <mat-label>בחר שעות</mat-label>
+    <!-- <mat-label>בחר שעות</mat-label>
       <mat-select [formControl]="hours" multiple>
         <mat-option  style="direction: rtl;" *ngFor="let hour of listOfHours" [value]="hour.start + '-' + hour.end"  (click)="updateHoursSelection(hour.code)">{{hour.start.at_hour}} - {{hour.end.at_hour}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+      </mat-select> -->
+      <!-- <div> שעות מסוימות
+        <mat-form-field  class="hours">
+          <mat-label>שעת התחלה</mat-label>
+          <8input name="startHour" type="time" [(ngModel)]="startHour" matInput >
+        </mat-form-field>
+        <mat-form-field class="hours">
+          <mat-label>שעת סיום</mat-label>
+          <input name="endHour" type="time" [(ngModel)]="endHour" matInput >
+        </mat-form-field>
+        <br>
+        <label>שים לב - מספר הדקות שתבחר יתעגל לרבע השעה הקרובה</label>
+      </div> -->
 
-    <br><br>
+      <!-- <div> שעות מסוימות
+        <mat-form-field  class="hours">
+          <mat-label>שעת התחלה</mat-label>
+          <input name="startHour" type="time" [(ngModel)]="startHour" matInput >
+        </mat-form-field>
+        <mat-form-field class="hours">
+          <mat-label>שעת סיום</mat-label>
+          <input name="endHour" type="time" [(ngModel)]="endHour" matInput >
+        </mat-form-field>
+        <br>
+        <label>שים לב - מספר הדקות שתבחר יתעגל לרבע השעה הקרובה</label>
+      </div> -->
+
+      <div style="font-size: small;text-align: center;width:300px;margin-right: 120px;">
+      <mat-label style="margin:15px;font-size: medium !important;">בין השעות: </mat-label>
+      <mat-icon style="cursor:'pointer';color: rgb(245, 4, 133);" (click)="addHour()">playlist_add</mat-icon>
+      <div style="overflow-y: auto;max-height: 150px;">
+      <div *ngFor="let item of listOfHours">
+      <mat-form-field class="hours">
+        <mat-select>
+          <mat-option *ngFor="let sHour of allHours" aria-placeholder="שעת התחלה" [value]="sHour.at_hour" (onSelectionChange)="updateStartHourSelection(item.code,sHour.hour_code)">
+            {{sHour.at_hour.substring(0,5)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field  class="hours">
+        <mat-select>
+          <mat-option *ngFor="let eHour of allHours" [value]="eHour.at_hour" (onSelectionChange)="updateEndHourSelection(item.code,eHour.hour_code)">
+            {{eHour.at_hour.substring(0,5)}}
+          </mat-option>
+          </mat-select>
+      </mat-form-field>
+        <label style="cursor:'pointer';font-size:small;font-weight: 500;color: rgb(245, 4, 133);" (click)="removeHour(item.code)">X</label>
+    </div>
+    </div>
+    </div>
+
+    <br>
+     
+  
     <mat-button-toggle-group class="days" #specificDays multiple aria-required="true">
       <mat-button-toggle *ngFor="let day of days" (change)="selectionChange(day.code)" >{{day.name}}</mat-button-toggle>
     </mat-button-toggle-group>
-  <br><br>
-   <br>
+   <br><br>
    <button name="save" mat-raised-button color="accent" class="ok" type="submit" [disabled]="moneSelectedDays==0">אישור</button>
    <br>
  </div>

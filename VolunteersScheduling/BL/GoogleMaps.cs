@@ -96,6 +96,5 @@ namespace BL
             url += path1 + "&origins=place_id:" + path2 + "&key=AIzaSyAyEYq8aMTFp3eNcRxWj3z4rFPLx7BamYo";
             return url;
         }
-
     }
 }

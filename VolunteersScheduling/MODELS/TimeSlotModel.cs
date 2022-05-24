@@ -14,5 +14,19 @@ namespace MODELS
         public System.DateTime end_at_date { get; set; }
         public int end_at_hour { get; set; }
         public int start_at_hour { get; set; }
+
+        public TimeSlotModel() { }
+
+        public TimeSlotModel(TimeSlotModel ts)
+        {
+            this.start_at_date = ts.start_at_date;
+            this.end_at_date = ts.end_at_date;
+            this.start_at_hour = ts.start_at_hour;
+            this.end_at_hour = ts.end_at_hour;
+            this.day_of_week = ts.day_of_week;
+            this.time_slot_code = ts.time_slot_code;
+
+
+        }
     }
 }

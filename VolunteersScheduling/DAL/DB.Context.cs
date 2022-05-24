@@ -36,9 +36,5 @@ namespace DAL
         public virtual DbSet<volunteer> volunteers { get; set; }
         public virtual DbSet<volunteer_possible_time> volunteer_possible_time { get; set; }
         public virtual DbSet<volunteering_details> volunteering_details { get; set; }
-        public DbSet<T> GetDbSet<T>() where T : class
-        {
-            return this.Set<T>();
-        }
     }
 }

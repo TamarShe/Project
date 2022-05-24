@@ -16,14 +16,13 @@ namespace BL
         {
             DBConnection dBConnection = new DBConnection();
 
-            //עדכון הלוח הקיים של הארגון שכל מה שיש יגמר בתאריך ההתחלה שהכניס
+            //עדכון הלוח הקיים של הארגון שכל מה שיש עד עכשיו יגמר בתאריך של היום כי מעכשיו תהיה מערכת חדשה
             List<schedule> scheduleToDelete = dBConnection.GetDbSet<schedule>().FindAll(s => s.neediness_details.organization.org_code == orgCode).ToList();
             foreach (var item in scheduleToDelete)
             {
                 item.time_slot.end_at_date = DateTime.Today;
                 dBConnection.Execute<schedule>(item, DBConnection.ExecuteActions.Update);
             }
-
 
             Population population = new Population(100, new TimeTableChromosome(dBConnection, orgCode),
                                                     new TimeTableChromosome.FitnessFunction(), new EliteSelection());
@@ -38,47 +37,18 @@ namespace BL
                 }
             }
 
-            TimeSlotProperties timeSlotProperties = new TimeSlotProperties();
             List<TimeSlotProperties> value = (population.BestChromosome as TimeTableChromosome).timeSlotsPropertiesList.ToList();
-            
-            ////להכניס את הנתונים לDB
-            //foreach (var val in value)
-            //{
-            //    h.InsertSettingHour(val);
-            //}
 
+            //הכנסת פרטי השיבוץ למסד הנתונים
+            schedule newScheduleSlot = new schedule();
 
-            ////לבדוק האם כל השעות שהמבוגר ביקש שובצו, ואם לא- להפעיל את הפונקציה של שליחת מייל
-            ////רשימה של כל קרובי המשפחה של המבוגר שהתקבל
-            //var listOfRelativesToAdult = listOfRelatives.Where(r => r.adultId == adultId).ToList();
-            ////רשימה של כל השעות הדרושות למבוגר שהתקבל
-            //var listofDemandHoursToAdult = listOfAdultDemandHours.Where(d => d.adultId == adultId).ToList();
-            ////listofDemandHoursToAdult = listofDemandHoursToAdult.Where(la => value.Find(v => v.scheduleHourCode ==la) == null);
-            //List<adultDemandHours> missingHours = new List<adultDemandHours>();
-            //foreach (var item in listofDemandHoursToAdult)
-            //{
-            //    if (value.Find(v => v.scheduleHourCode == item.scheduleHourCode) == null && missingHours.Contains(item) == false)
-            //        missingHours.Add(item);
-            //}
-            //if (missingHours != null)
-            //{
-            //    List<scheduleHours> l = new List<scheduleHours>();
-            //    foreach (var item in missingHours)
-            //    {
-            //        l.Add(listOfScheduleHours.First(s => s.code == item.scheduleHourCode));
-            //    }
-            //    //מכאן השינוי
-            //    // List<Days> listOfDaysMissingHours = GetAllDays().Where(d => l.Find(l6=>l6.dayCode== d.code).dayCode==d.code).ToList();
-            //    // List<Hours> listOfHoursMissingHours=GetAllHours().Where(h1 => l.Find(l7 => l7.hourCode == h1.code).hourCode == h1.code).ToList();
-            //    //עד כאן
-
-            //    //listOfRelativesToAdult.Select(r=>r.mail).ToList()
-            //    List<string> l8 = new List<string>();
-            //    l8.Add("s0556749180@gmail.com");
-
-            //    EmailSending.SendMailToRelatives(l, l8, "מעדכן אותך אודות שעות שלא משובצות Twenty for saba application");
-            //}
-
+            foreach (var item in value)
+            {
+                newScheduleSlot.time_slot_code = item.time.time_slot_code;
+                newScheduleSlot.volunteering_details_code = item.volunteer.volunteering_details.First(v => v.org_code == item.orgCode).volunteering_details_code;
+                newScheduleSlot.neediness_details_code = item.needy.neediness_details.First(n => n.org_code == item.orgCode).neediness_details_code;
+                dBConnection.Execute<schedule>((newScheduleSlot),DBConnection.ExecuteActions.Insert);
+            }
         }
     }
 }

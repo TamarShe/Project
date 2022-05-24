@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BL.BL">
+    <Position X="31" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>BL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.DistanceBase">
+    <Position X="33.5" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAABAAAAQAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleMaps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Row">
+    <Position X="33.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleMaps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Element">
+    <Position X="35.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleMaps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Distance">
+    <Position X="35.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAIAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleMaps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Duration">
+    <Position X="33.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAIAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleMaps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.RootLocationBase">
+    <Position X="33.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleMaps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Result">
+    <Position X="35.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleMaps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.GoogleMaps">
+    <Position X="34.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>GoogleMaps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.ReadExcel">
+    <Position X="30.75" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAIAAAAAACCACSQAAiAAAAAAAAAAAKAAAAAAGAA=</HashCode>
+      <FileName>ReadExcel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.SendEmail">
+    <Position X="30.75" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SendEmail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.TimeSlotProperties">
+    <Position X="27.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAQAQAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>TimeSlotProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.TimeTableChromosome">
+    <Position X="27.25" Y="2.25" Width="3" />
+    <NestedTypes>
+      <Class Name="BL.TimeTableChromosome.FitnessFunction" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>TimeTableChromosome.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAkCAAAACaAQAAAAEAAAAgAAABAABAAACAAQBGAAAFE=</HashCode>
+      <FileName>TimeTableChromosome.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.VolunteersSchedulingBL">
+    <Position X="11.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAKAAAAAAAAAAAAAKAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VolunteersSchedulingBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.ManagerBL" Collapsed="true">
+    <Position X="14.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAABIAAAAAAAAAABABQAAAAAAAAEAAAAAAAgAA=</HashCode>
+      <FileName>Classes\ManagerBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.NeedinessDetailsBL" Collapsed="true">
+    <Position X="10.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAIAAAAAAIAAAAAAAAAAAAAIAACAQAAAA4AA=</HashCode>
+      <FileName>Classes\NeedinessDetailsBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.NeedyBL" Collapsed="true">
+    <Position X="12.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAICACAAABAABAAAAAAAEAAAAAAAABAAAAQAAEgAgAA=</HashCode>
+      <FileName>Classes\NeedyBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.NeedyPossibleTimeBL" Collapsed="true">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAASACAAAAAAEAABAABAAAAAAAAAAEAAIAAAAAgAA=</HashCode>
+      <FileName>Classes\NeedyPossibleTimeBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.OrganizationBL" Collapsed="true">
+    <Position X="8" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAgAAAAgAIAgAAAAAAAAAgAAAggAAAAIgAE=</HashCode>
+      <FileName>Classes\OrganizationBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.ScheduleBL" Collapsed="true">
+    <Position X="10.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAACAAMAAAABAAAAAAEAAgAAAAAAAAQhAAAAAIgAA=</HashCode>
+      <FileName>Classes\ScheduleBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.CalendarEvent">
+    <Position X="11.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACQAAAACAgAAQAAAAAAAAAQAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Classes\ScheduleBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.NeedyCalendarEvent">
+    <Position X="13.25" Y="10.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\ScheduleBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.VolunteerCalendarEvent">
+    <Position X="8.75" Y="10.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\ScheduleBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.ManagerCalendarEvent">
+    <Position X="11" Y="10.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\ScheduleBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.TimeSlotBL" Collapsed="true">
+    <Position X="8" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gABAACAAAAAAAAAAABAABAAAABAQAAgAAAAAAAAAgAA=</HashCode>
+      <FileName>Classes\TimeSlotBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.VolunteerBL" Collapsed="true">
+    <Position X="12.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAACAQAAABAAAAAAAAABAAAQAAQABAgAQAAAAAgAA=</HashCode>
+      <FileName>Classes\VolunteerBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.VolunteeringDetailsBL" Collapsed="true">
+    <Position X="14.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABABACACACAAAAAAAAAAAAAAAAAAACAACAAAAAAAoAA=</HashCode>
+      <FileName>Classes\VolunteeringDetailsBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BL.Classes.VolunteerPossibleHoursBL" Collapsed="true">
+    <Position X="12.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAABACAAAAAAAYAAAAAAAAAAAAACAQAAAAQAAAAAgAA=</HashCode>
+      <FileName>Classes\VolunteerPossibleHoursBL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

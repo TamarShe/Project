@@ -15,6 +15,7 @@ import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-i
 import { hours } from 'src/app/Models/Hours.model';
 import { FormControl } from '@angular/forms';
 import { HoursService } from 'src/app/Services/hours.service';
+import { IndentStyle } from 'typescript';
 
 export interface Days{
   code:number
@@ -26,7 +27,6 @@ export class hoursList{
   code!:number
   start!:hours
   end!:hours
-  selected!:boolean
 }
 
 @Component({
@@ -58,7 +58,12 @@ export class NeedyconstraintsComponent {
 
   allHours:hours[]=[];
 
-  listOfHours:hoursList[]=[];
+  listOfHours:hoursList[]=[{
+    code:1,
+    start:new hours(),
+    end:new hours()
+  }];
+  listOfOldHours:hoursList[]=[];
 
   showChangesButtons=false;
 
@@ -96,8 +101,7 @@ export class NeedyconstraintsComponent {
     if(this.userId!=null)
     {
       this.needyPossibleTimeService.getAllPossibleTimeSlots(this.selectedNeedinessDetails.neediness_details_code).subscribe(a=>
-        {console.log(a);
-        a.forEach(element => {
+        {a.forEach(element => {
           this.dataSource.push(element);
         });
     })}
@@ -108,7 +112,6 @@ export class NeedyconstraintsComponent {
    {
       this.loading=true;
       this.listOfHours.forEach(hour=>{
-        if(hour.selected){
           this.days.forEach(day =>
             {
               if(day.isChecked)
@@ -122,7 +125,7 @@ export class NeedyconstraintsComponent {
                   day_of_week:day.code
                 })
               }
-            })}})
+            })})
 
             setTimeout(() => {
               if(this.listOfTimeSlots.length>0){
@@ -176,11 +179,10 @@ export class NeedyconstraintsComponent {
         var mone=0;
         this.hoursService.GetListOfStartAndEnd(+(this.selectedOrg?.avg_volunteering_time+"")).subscribe(t=>{
           t.forEach(element => {
-            this.listOfHours.push({
+            this.listOfOldHours.push({
               code:++mone,
               start:element[0],
-              end:element[1],
-              selected:false
+              end:element[1]
             })
           });
          } )
@@ -193,7 +195,26 @@ export class NeedyconstraintsComponent {
       })
    }
 
-   updateHoursSelection(code:number){
-      this.listOfHours[code-1].selected=!this.listOfHours[code-1].selected;   
-   }
+
+  updateEndHourSelection(listCode:number,newhourCode:number){
+    this.listOfHours[listCode-1].end.hour_code=newhourCode;
+  }
+
+  
+  updateStartHourSelection(listCode:number,newhourCode:number){
+    this.listOfHours[listCode-1].start.hour_code=newhourCode;
+  }
+
+  removeHour(index:number){
+    this.listOfHours.splice(index-1,1);
+  }
+
+  addHour()
+  {
+    this.listOfHours.push({
+      code:this.listOfHours.length+1,
+      start:new hours,
+      end:new hours
+    })
+  }
 }
