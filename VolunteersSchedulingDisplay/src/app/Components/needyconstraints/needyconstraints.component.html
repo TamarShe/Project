@@ -87,7 +87,7 @@
           <mat-icon>delete</mat-icon>
         </button>
       </td>
-      <td>ביום {{days[timeslot.day_of_week-1].name}}, בין השעות {{allHours[timeslot.start_at_hour-1].at_hour}} - {{allHours[timeslot.end_at_hour-1].at_hour}}</td>
+      <td>ביום {{days[timeslot.day_of_week-1].name}}, בין השעות {{allHours[timeslot.start_at_hour-1].at_hour.toString().substring(0,5)}} - {{allHours[timeslot.end_at_hour-1].at_hour.toString().substring(0,5)}}</td>
        </tr>
     </tbody>
   </table>
@@ -96,4 +96,6 @@
   <button name="leaveTheCurrentSchedule" mat-raised-button color="accent"  *ngIf="showChangesButtons">בטל את המערכת שלי עד לשיבוץ הבא</button>
 </div>
 </form>
+
+
 

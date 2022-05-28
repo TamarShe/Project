@@ -31,8 +31,16 @@ namespace BL.Classes
             NeedyBL needyBL =new NeedyBL();
             TimeSlotBL timeSlotBL = new TimeSlotBL();
             List<VolunteerCalendarEvent> volunteerCalendarEvents = new List<VolunteerCalendarEvent>();
-            //רשימה שמכילה את כל המשבצות של לוז שקשורות לנזקק הזה
-            List<ScheduleModel> scheduleList = this.GetAllSchedule().FindAll(v => volunteeringDetailsBL.GetAllVolunteeringDetails().Find(a => a.volunteer_ID == volunteerID).volunteering_details_code == v.volunteering_details_code);
+            //רשימה שמכילה את כל המשבצות של לוז שקשורות למתנדב הזה
+            List<ScheduleModel> scheduleList;
+            try
+            {
+                scheduleList = this.GetAllSchedule().FindAll(v => volunteeringDetailsBL.GetAllVolunteeringDetails().Find(a => a.volunteer_ID == volunteerID).volunteering_details_code == v.volunteering_details_code);
+            }
+            catch
+            {
+                return null;
+            }
             NeedinessDetailsModel needinessDetail = new NeedinessDetailsModel();
             TimeSlotModel timeSlot = new TimeSlotModel();
             VolunteerCalendarEvent volunteerCalendarEvent;
@@ -54,13 +62,6 @@ namespace BL.Classes
             return volunteerCalendarEvents;
         }
 
-        //public List<MODELS.ScheduleModel> GetScheduleForNeedy(string needyID)
-        //{
-        //    NeedinessDetailsBL needinessDetailsBL = new NeedinessDetailsBL();
-        //    return this.GetAllSchedule().FindAll(n => needinessDetailsBL.GetAllNeedinessDetails().Find(a => a.needy_ID == needyID).neediness_details_code == n.neediness_details_code);
-            
-        //}
-
         public List<NeedyCalendarEvent> GetScheduleForNeedy(string needyID)
         {
             NeedinessDetailsBL needinessDetailsBL = new NeedinessDetailsBL();
@@ -68,9 +69,17 @@ namespace BL.Classes
             TimeSlotBL timeSlotBL = new TimeSlotBL();
             VolunteeringDetailsBL volunteeringDetailsBL = new VolunteeringDetailsBL();
             List<NeedyCalendarEvent> needyEvent = new List<NeedyCalendarEvent>();
+            List<ScheduleModel> scheduleList;
             //רשימה שמכילה את כל המשבצות של לוז שקשורות לנזקק הזה
-            List<ScheduleModel> scheduleList = this.GetAllSchedule().FindAll(n => needinessDetailsBL.GetAllNeedinessDetails().Find(a => a.needy_ID == needyID).neediness_details_code == n.neediness_details_code);
-            VolunteeringDetailsModel volunteeringDetails = new VolunteeringDetailsModel();
+            try
+            {
+                scheduleList = this.GetAllSchedule().FindAll(n => needinessDetailsBL.GetAllNeedinessDetails().Find(a => a.needy_ID == needyID).neediness_details_code == n.neediness_details_code);
+            }
+            catch (Exception ex)
+            { 
+                return null; 
+            }
+                VolunteeringDetailsModel volunteeringDetails = new VolunteeringDetailsModel();
             TimeSlotModel timeSlot = new TimeSlotModel();
             NeedyCalendarEvent needyCalendarEvent;
             for (int i = 0; i < scheduleList.Count; i++)
@@ -100,10 +109,17 @@ namespace BL.Classes
             ManagerBL managerBL = new ManagerBL();
             ManagerModel manager = managerBL.GetAllManagers().First(m=> m.manager_Id == managerID);
             TimeSlotBL timeSlotBL = new TimeSlotBL();
-            List<ManagerCalendarEvent> managerEvents = new List<ManagerCalendarEvent>();
+            List<ManagerCalendarEvent> managerEvents=new List<ManagerCalendarEvent>();
             //רשימה שמכילה את כל המשבצות של לוז שקשורות למנהל הזה
-            List<ScheduleModel> scheduleList = this.GetAllSchedule().FindAll(s =>
-                (needinessDetailsBL.GetAllNeedinessDetails().First(n=>n.neediness_details_code==s.neediness_details_code)).org_code==manager.manager_org_code);
+            List<ScheduleModel> scheduleList = new List<ScheduleModel>();
+            try
+            {
+                scheduleList= this.GetAllSchedule().FindAll(s =>(needinessDetailsBL.GetAllNeedinessDetails().First(n => n.neediness_details_code == s.neediness_details_code)).org_code == manager.manager_org_code);
+            }
+            catch
+            {
+                return null;
+            }
             VolunteeringDetailsModel volunteeringDetails = new VolunteeringDetailsModel();
             NeedinessDetailsModel needinessDetails = new NeedinessDetailsModel();
 

@@ -108,7 +108,6 @@ C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\BL\bin\Debug\System.Runtim
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\BL\bin\Debug\System.Web.Cors.dll
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\BL\bin\Debug\System.Web.Http.Cors.dll
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\BL\bin\Debug\System.Web.Http.dll
-C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\BL\bin\Debug\EntityFramework.dll
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\BL\bin\Debug\DAL.pdb
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\BL\bin\Debug\DAL.dll.config
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\BL\bin\Debug\MODELS.pdb

@@ -4,7 +4,6 @@
     <mat-icon>arrow_forward</mat-icon>
   </button>
     <button mat-raised-button color="secondary" mwlCalendarToday [(viewDate)]="viewDate">
-    <!-- <mat-icon>calendar_today</mat-icon> -->
     היום
     </button>
   <button mat-raised-button color="primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
@@ -59,17 +58,20 @@
     </mat-form-field>
 
     <br>
-
-       <mat-form-field  appearance="fill" class="hours">
-         <mat-label>שעת התחלה</mat-label>
-         <input name="startHour" type="time" [(ngModel)]="newTimeSlot.start_at_hour" matInput>
-       </mat-form-field>
-       <mat-form-field appearance="fill" class="hours">
-         <mat-label>שעת סיום</mat-label>
-         <input name="endHour" type="time" [(ngModel)]="newTimeSlot.end_at_hour" matInput >
-       </mat-form-field><br>
-       <label class="comment">שים לב - מספר הדקות שתבחר יתעגל לרבע השעה הקרובה</label>
-
+        <mat-form-field class="hours">
+          <mat-select>
+            <mat-option *ngFor="let sHour of allHours" aria-placeholder="שעת התחלה" [value]="sHour.at_hour" (onSelectionChange)="updateStartHourSelection(sHour.hour_code)">
+              {{sHour.at_hour.substring(0,5)}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field  class="hours">
+          <mat-select>
+            <mat-option *ngFor="let eHour of allHours" [value]="eHour.at_hour" (onSelectionChange)="updateEndHourSelection(eHour.hour_code)">
+              {{eHour.at_hour.substring(0,5)}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
      <br>
      <mat-form-field appearance="fill">
    <mat-label>בחר טווח תאריכים</mat-label>

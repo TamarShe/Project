@@ -26,8 +26,8 @@ namespace DAL
         public int day_of_week { get; set; }
         public System.DateTime start_at_date { get; set; }
         public System.DateTime end_at_date { get; set; }
-        public Nullable<int> end_at_hour { get; set; }
-        public Nullable<int> start_at_hour { get; set; }
+        public int end_at_hour { get; set; }
+        public int start_at_hour { get; set; }
     
         public virtual hour hour { get; set; }
         public virtual hour hour1 { get; set; }

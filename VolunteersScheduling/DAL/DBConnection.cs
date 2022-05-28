@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using MODELS;
@@ -14,7 +16,18 @@ namespace DAL
         {
             using (volunteers_scheduling_DBEntities volunteers_scheduling_DBEntities = new volunteers_scheduling_DBEntities())
             {
+                volunteers_scheduling_DBEntities.Configuration.LazyLoadingEnabled = false;
                 return volunteers_scheduling_DBEntities.GetDbSet<T>().ToList();
+            }
+        }
+
+        public List<T> GetDbSetWithIncludes<T>(string[] includes) where T : class
+        {
+            using (volunteers_scheduling_DBEntities volunteers_scheduling_DBEntities = new volunteers_scheduling_DBEntities())
+            {
+                volunteers_scheduling_DBEntities.Configuration.LazyLoadingEnabled = false;
+
+                return volunteers_scheduling_DBEntities.IncludeMultiple<T>(volunteers_scheduling_DBEntities.GetDbSet<T>(),includes).ToList();
             }
         }
 
@@ -48,6 +61,11 @@ namespace DAL
                 }
                 volunteers_scheduling_DBEntities.SaveChanges();
             }
+        }
+
+        public List<time_slot> GetDbSetWithMultiplelncludes<T>(Func<object, object> p1, Func<T, object> p2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

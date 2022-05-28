@@ -19,6 +19,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { NeedinessDetails } from 'src/app/Models/NeedinessDetails.model';
 import { Schedule } from 'src/app/Models/Schedule.model';
 import { VolunteeringDetails } from 'src/app/Models/VolunteeringDetails.model';
+import { hours } from 'src/app/Models/Hours.model';
+import { HoursService } from 'src/app/Services/hours.service';
 
 registerLocaleData(localeEs);
 
@@ -58,8 +60,10 @@ export class NeedyScheduleComponent{
   //תאריך ואירוע נוכחיים - מתעדכן בלחיצה על אירוע
   currentDate=new Date();
   currentEvent!:MyCalendarEvents;
+  allHours:hours[]=[];
 
-    constructor( public datepipe: DatePipe,private volunteeringDetailsService:VolunteeringDetailsService,public matDialog:MatDialog,private scheduleService:ScheduleService,private route:ActivatedRoute,private needinessDetailsService:NeedinessDetailsService,private timeSlotService:TimeSlotService,private needyService:NeedyService,private volunteerService:VolunteerService,private _snackBar:MatSnackBar) {
+
+    constructor(private hoursService:HoursService, public datepipe: DatePipe,private volunteeringDetailsService:VolunteeringDetailsService,public matDialog:MatDialog,private scheduleService:ScheduleService,private route:ActivatedRoute,private needinessDetailsService:NeedinessDetailsService,private timeSlotService:TimeSlotService,private needyService:NeedyService,private volunteerService:VolunteerService,private _snackBar:MatSnackBar) {
     this.route.parent?.paramMap.subscribe(b=> this.userID= b.get("needyid") as string);
     if(this.userID!=null)
     {
@@ -70,6 +74,7 @@ export class NeedyScheduleComponent{
         console.log(n);
       });
     }
+    this.hoursService.GetAllHours().subscribe(a=>this.allHours=a)
   }
 
   buildEvents()
@@ -157,7 +162,9 @@ console.log(secondTimeSlot.start_at_date.toLocaleDateString() + ", "
     this.currentEvent=event;
     this.currentDate=date.date;
     this.details="התנדבות על ידי  "+this.currentEvent.volunteer.volunteer_full_name+"\n"+
-                "בין השעות: "+this.currentEvent.timeSlot.start_at_hour.toString()+" - "+this.currentEvent.timeSlot.end_at_hour.toString();
+    "בין השעות: "+this.allHours[this.currentEvent.timeSlot.start_at_hour-1].at_hour.toString().substring(0,5)+
+    " - "+this.allHours[this.currentEvent.timeSlot.end_at_hour-1].at_hour.toString().substring(0,5);
+
   }
 
   check(date:any,event:MyCalendarEvents):boolean

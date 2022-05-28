@@ -41,12 +41,11 @@
 <ng-template #event let-day="day" let-locale="locale">
     <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}
       <div class="cal-cell-top">
-        <!-- <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span> -->
           <ng-container *ngFor="let event of day.events">
             <button  class="summary"  class="summary" *ngIf="check(day.date,event)"  (click)="onDetailsClick(event,day);matDialog.open(detail)">
             על ידי {{event.volunteer.volunteer_full_name}}
             <br>
-            {{event.timeSlot.start_at_hour.substring(0,5) +" - "+event.timeSlot.end_at_hour.substring(0,5)}}
+            {{allHours[event.timeSlot.start_at_hour-1].at_hour.toString().substring(0,5) +" - "+allHours[event.timeSlot.end_at_hour-1].at_hour.toString().substring(0,5)}}
             </button>
             </ng-container>
           </div>

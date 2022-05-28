@@ -187,6 +187,9 @@ export class NeedyconstraintsComponent {
           });
          } )
       }, 1500);
+      setTimeout(() => {
+        console.log(this.dataSource)
+      }, 2000);
    }
 
    ToShowChangesButtons(){

@@ -11,8 +11,11 @@ namespace DAL
 {
     using System;
     using System.Data.Entity;
+    using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Linq;
+    using System.Linq.Expressions;
+
     public partial class volunteers_scheduling_DBEntities : DbContext
     {
         public volunteers_scheduling_DBEntities()
@@ -36,5 +39,24 @@ namespace DAL
         public virtual DbSet<volunteer> volunteers { get; set; }
         public virtual DbSet<volunteer_possible_time> volunteer_possible_time { get; set; }
         public virtual DbSet<volunteering_details> volunteering_details { get; set; }
+
+        public DbSet<T> GetDbSet<T>() where T : class
+        {
+            return this.Set<T>();
+        }
+
+        public IQueryable<neediness_details> IncludeMultiple()
+        {
+            return this.neediness_details.Include("needy_possible_time.time_slot");
+        }
+
+        public IQueryable<T> IncludeMultiple<T>(IQueryable<T> query, string[] includes) where T : class
+        {
+            if (includes != null)
+            {
+                query = includes.Aggregate(query, (current, include) => current.Include(include));
+            }
+            return query;
+        }
     }
 }

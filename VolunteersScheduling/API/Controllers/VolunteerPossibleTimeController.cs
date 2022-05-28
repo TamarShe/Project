@@ -82,7 +82,7 @@ namespace API.Controllers
         [Route("VolunteerHasScheduleInVolunteeringDetails/{volunteeringDetailsCode}")]
         public bool VolunteerHasScheduleInVolunteeringDetails(int volunteeringDetailsCode)
         {
-            return volunteerPossibleHoursBL.GetConflicts(volunteeringDetailsCode);
+            return volunteerPossibleHoursBL.GetConflicts(volunteeringDetailsCode)!=null;
         }
     }
 }

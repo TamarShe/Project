@@ -45,7 +45,7 @@
             <button class="summary" *ngIf="check(day.date,event)"  (click)="onDetailsClick(event,day);matDialog.open(detail)">
             אצל {{event.needy.needy_full_name}}
             <br>
-            {{event.timeSlot.start_at_hour.substring(0,5) +" - "+event.timeSlot.end_at_hour.substring(0,5)}}
+            {{allHours[event.timeSlot.start_at_hour-1].at_hour.toString().substring(0,5) +" - "+allHours[event.timeSlot.end_at_hour-1].at_hour.toString().substring(0,5)}}
             </button>
             </ng-container>
           </div>

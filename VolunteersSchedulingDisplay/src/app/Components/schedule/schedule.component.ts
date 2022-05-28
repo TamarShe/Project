@@ -34,6 +34,8 @@ import {map, startWith} from 'rxjs/operators';
 import { Days } from '../constraints/constraints.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { time } from 'console';
+import { hours } from 'src/app/Models/Hours.model';
+import { HoursService } from 'src/app/Services/hours.service';
 
 registerLocaleData(localeEs);
 
@@ -79,6 +81,8 @@ export class ScheduleComponent implements OnInit{
   filteredVolunteers!: Observable<Volunteer[]>;
   needies!:Needy[];
   filteredNeedies!: Observable<Needy[]>;
+  allHours:hours[]=[];
+
 
   days:Days[]=[
     {code:1,name:'ראשון',isChecked:false},
@@ -97,7 +101,7 @@ export class ScheduleComponent implements OnInit{
 
   newTimeSlot:TimeSlot=new TimeSlot();
 
-    constructor( public datepipe: DatePipe,private managerService:ManagerService,private volunteeringDetailsService:VolunteeringDetailsService,public matDialog:MatDialog,private scheduleService:ScheduleService,private route:ActivatedRoute,private needinessDetailsService:NeedinessDetailsService,private timeSlotService:TimeSlotService,private needyService:NeedyService,private volunteerService:VolunteerService,private _snackBar:MatSnackBar) {
+    constructor( private hoursService:HoursService,public datepipe: DatePipe,private managerService:ManagerService,private volunteeringDetailsService:VolunteeringDetailsService,public matDialog:MatDialog,private scheduleService:ScheduleService,private route:ActivatedRoute,private needinessDetailsService:NeedinessDetailsService,private timeSlotService:TimeSlotService,private needyService:NeedyService,private volunteerService:VolunteerService,private _snackBar:MatSnackBar) {
     this.route.parent?.paramMap.subscribe(b=> this.userID= b.get("userid") as string);
     if(this.userID!=null)
     {
@@ -108,6 +112,7 @@ export class ScheduleComponent implements OnInit{
         this.managerService.GetAllNeediesInOrg(m.manager_org_code).subscribe(n=>this.needies=n);
       });
     }
+    this.hoursService.GetAllHours().subscribe(a=>this.allHours=a)
   }
 
 
@@ -186,7 +191,8 @@ secondTimeSlot.start_at_date.setDate(this.currentDate.getDate()+6);
     this.currentDate=date.date;
     this.details="התנדבות של  "+this.currentEvent.volunteer.volunteer_full_name+"\n"+
                 " אצל "+this.currentEvent.needy.needy_full_name+"\n"+
-                "בין השעות: "+this.currentEvent.timeSlot.start_at_hour.toString()+" - "+this.currentEvent.timeSlot.end_at_hour.toString()+"\n"+
+                "בין השעות: "+this.allHours[this.currentEvent.timeSlot.start_at_hour-1].at_hour.toString().substring(0,5)+
+                " - "+this.allHours[this.currentEvent.timeSlot.end_at_hour-1].at_hour.toString().substring(0,5)+"\n"+
                 "בכתובת "+this.currentEvent.needy.needy_address+"\n\n"+
                 " פרטים: \n"+this.currentEvent.needinessDetails.details;
   }
@@ -233,6 +239,15 @@ secondTimeSlot.start_at_date.setDate(this.currentDate.getDate()+6);
   updateDaySelection(dayCode:any)
   {
     this.newTimeSlot.day_of_week=dayCode;
+  }
+
+  updateEndHourSelection(newhourCode:number){
+    this.newTimeSlot.end_at_hour=newhourCode;
+  }
+
+  
+  updateStartHourSelection(newhourCode:number){
+    this.newTimeSlot.start_at_hour=newhourCode;
   }
 
 }

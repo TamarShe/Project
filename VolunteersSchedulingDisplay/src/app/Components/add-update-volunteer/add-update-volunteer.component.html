@@ -41,7 +41,7 @@
           <th>טלפון</th>
           <th>מייל</th>
           <th>תאריך לידה</th>
-          <th>זמן התנדבות לשבוע, בדקות</th>
+          <th>מספר שעות התנדבות שבועי רצוי</th>
         </tr>
     </thead>
     <tbody>
@@ -60,7 +60,7 @@
         <td>{{ row.volunteer.volunteer_address }}</td>
         <td>{{ row.volunteer.volunteer_phone }}</td>
         <td>{{ row.volunteer.volunteer_email }}</td>
-        <td>{{ row.volunteer.volunteer_birth_date }}</td>
+        <td>{{ row.volunteer.volunteer_birth_date | date }}</td>
         <td>{{ row.volunteeringDetails.weekly_hours }}</td>
       </tr>
     </tbody>

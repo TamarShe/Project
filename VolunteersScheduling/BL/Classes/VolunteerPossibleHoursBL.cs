@@ -117,7 +117,8 @@ namespace BL.Classes
 
 
             //לגמור את זה ולהעתיק לזמן נזקק
-            return slotsOfSchedule.Intersect(slotsOfPossibleTime).Count()>0;
+            //return slotsOfSchedule.Intersect(slotsOfPossibleTime).Count()>0;
+            return new List<int>();
         }
     }
 }
