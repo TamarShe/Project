@@ -45,11 +45,6 @@ namespace DAL
             return this.Set<T>();
         }
 
-        public IQueryable<neediness_details> IncludeMultiple()
-        {
-            return this.neediness_details.Include("needy_possible_time.time_slot");
-        }
-
         public IQueryable<T> IncludeMultiple<T>(IQueryable<T> query, string[] includes) where T : class
         {
             if (includes != null)

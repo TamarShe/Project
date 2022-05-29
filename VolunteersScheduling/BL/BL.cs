@@ -41,9 +41,19 @@ namespace BL
 
             //הכנסת פרטי השיבוץ למסד הנתונים
             schedule newScheduleSlot = new schedule();
+            time_slot newTimeSlot;
+            TimeSlotBL timeSlotBL = new TimeSlotBL();
 
             foreach (var item in value)
             {
+                newTimeSlot = new time_slot();
+                newTimeSlot.start_at_date = item.time.start_at_date;
+                newTimeSlot.end_at_date = item.time.end_at_date;
+                newTimeSlot.start_at_hour = item.time.start_at_hour;
+                newTimeSlot.end_at_hour = item.time.end_at_hour;
+                newTimeSlot.day_of_week = item.time.day_of_week;
+                newTimeSlot.time_slot_code = timeSlotBL.InsertTimeSlot(TimeSlotBL.ConvertTimeSlotToModel(newTimeSlot));            
+
                 newScheduleSlot.time_slot_code = item.time.time_slot_code;
                 newScheduleSlot.volunteering_details_code = item.volunteer.volunteering_details.First(v => v.org_code == item.orgCode).volunteering_details_code;
                 newScheduleSlot.neediness_details_code = item.needy.neediness_details.First(n => n.org_code == item.orgCode).neediness_details_code;

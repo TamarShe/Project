@@ -14,25 +14,25 @@ namespace BL
     {
         private readonly DBConnection DBCon = new DBConnection();
         public List<TimeSlotProperties> timeSlotsPropertiesList = new List<TimeSlotProperties>();
-        private int orgCode;
-        static Random Random = new Random();
+        private organization currentOrg;
+        private static Random Random = new Random();
 
-        List<organization> listOfOrganizations;
-        List<volunteer> listOfVolunteers;
-        List<needy> listOfNeedies;
-        List<volunteering_details> listOfVolunteeringDetails;
-        List<neediness_details> listOfNeedinessDetails;
-        List<volunteer_possible_time> listOfVolunteersPossibleTime;
-        List<needy_possible_time> listOfNeediesPossibleTimes;
-        List<time_slot> listOfTimeSlots;
-        List<hour> listOfHours;
+        private List<organization> listOfOrganizations;
+        private List<volunteer> listOfVolunteers;
+        private List<needy> listOfNeedies;
+        private List<volunteering_details> listOfVolunteeringDetails;
+        private List<neediness_details> listOfNeedinessDetails;
+        private List<volunteer_possible_time> listOfVolunteersPossibleTime;
+        private List<needy_possible_time> listOfNeediesPossibleTimes;
+        private List<time_slot> listOfTimeSlots;
+        private List<hour> listOfHours;
         
 
         public TimeTableChromosome(DBConnection db, int orgCode)
         {
             DBCon = db;
-            this.orgCode = orgCode;
             InitializeLists();
+            this.currentOrg = listOfOrganizations.Find(org=>org.org_code==orgCode);
             Generate();
         }
 
@@ -40,6 +40,7 @@ namespace BL
         {
             this.DBCon = db;
             this.timeSlotsPropertiesList = slots;
+            //if to initialize here the org and how
             InitializeLists();
         }
 
@@ -48,17 +49,17 @@ namespace BL
             listOfOrganizations = DBCon.GetDbSet<organization>().ToList();
             listOfVolunteers = DBCon.GetDbSet<volunteer>().ToList();
             listOfNeedies = DBCon.GetDbSet<needy>().ToList();
-            listOfVolunteeringDetails = DBCon.GetDbSet<volunteering_details>().ToList();
-            listOfNeedinessDetails = DBCon.GetDbSet<neediness_details>().ToList();
-            listOfVolunteersPossibleTime = DBCon.GetDbSet<volunteer_possible_time>().ToList();
-            listOfNeediesPossibleTimes = DBCon.GetDbSet<needy_possible_time>().ToList();
+            listOfVolunteeringDetails = DBCon.GetDbSetWithIncludes<volunteering_details>(new string[] { "volunteer_possible_time.time_slot" }).ToList();
+            listOfNeedinessDetails = DBCon.GetDbSetWithIncludes<neediness_details>(new string[] { "needy_possible_time.time_slot" }).ToList();
+            listOfVolunteersPossibleTime = DBCon.GetDbSetWithIncludes<volunteer_possible_time>(new string[] { "volunteering_details", "time_slot" }).ToList();
+            listOfNeediesPossibleTimes = DBCon.GetDbSetWithIncludes<needy_possible_time>(new string[]{"neediness_details","time_slot"}).ToList();
             listOfTimeSlots = DBCon.GetDbSet<time_slot>().ToList();
             listOfHours = DBCon.GetDbSet<hour>().ToList();
         }
 
         public override IChromosome CreateNew()
         {
-            var timeTableChromosome = new TimeTableChromosome(DBCon, this.orgCode);
+            var timeTableChromosome = new TimeTableChromosome(DBCon, currentOrg.org_code);
             timeTableChromosome.Generate();
             return timeTableChromosome;
         }
@@ -68,10 +69,15 @@ namespace BL
             return Random.Next(0, limit);
         }
 
-        public List<volunteering_details> GetPossibleVolunteersForOrgAndHour(int orgCode,int startHourCode)
+        public List<volunteering_details> GetPossibleVolunteersForOrgAndHour(int startHourCode,int dayOfWeek)
         {
-            var listOfVolunteeringDetailsInCurrentOrg = listOfVolunteeringDetails.FindAll(vd => vd.org_code == orgCode).ToList();
-            var listOfPossibleVolunteersInTheCurrentHour = listOfVolunteeringDetailsInCurrentOrg.FindAll(vd => vd.volunteer_possible_time.ToList().FindAll(vpt => vpt.time_slot.start_at_hour == startHourCode).Count > 0).ToList();
+            var listOfVolunteeringDetailsInCurrentOrg = listOfVolunteeringDetails.FindAll(vd => vd.org_code == currentOrg.org_code).ToList();
+            var listOfPossibleVolunteersInTheCurrentHour = listOfVolunteeringDetailsInCurrentOrg.FindAll(
+                vd => vd.volunteer_possible_time.ToList().FindAll(
+                        vpt => vpt.time_slot.start_at_hour<= startHourCode 
+                            && vpt.time_slot.end_at_hour>=startHourCode+(currentOrg.avg_volunteering_time/15)
+                            && vpt.time_slot.day_of_week==dayOfWeek)
+                .Count > 0).ToList();
             return listOfPossibleVolunteersInTheCurrentHour;
         }
 
@@ -80,11 +86,8 @@ namespace BL
             var list = new List<TimeSlotProperties>();
             var timeSlotProperties = new TimeSlotProperties();
 
-            //הארגון הנוכחי
-            var organization = listOfOrganizations.First(o => o.org_code == orgCode);
-
             //רשימות פרטי הנזקקים שקשורים לארגון הזה
-            var listOfNeedinessDetailsInCurrentOrg = listOfNeedinessDetails.FindAll(nd => nd.org_code == orgCode).ToList();
+            var listOfNeedinessDetailsInCurrentOrg = listOfNeedinessDetails.FindAll(nd => nd.org_code == currentOrg.org_code).ToList();
 
             //רשימת כל הזמנים האפשרים למתנדב הרלוונטים לארגון
             var listOfPossibleVolunteersInTheCurrentHour = new List<volunteering_details>();
@@ -100,17 +103,20 @@ namespace BL
                 //אתחול המשתנים שיתאימו לנזקק הנוכחי
                 currentNeedy = listOfNeedies.First(needy => needy.needy_ID == currentNeedinessDetails.needy_ID);
 
-                //בונה את רשימת כל המשבצות זמן שהנזקק הנוכחי זקוק להם בארגון הזה ומערבב את סדר הרשימה ברנדומליות
-                listOfPossibleTimeSlotsOfCurrentNeedy = listOfNeediesPossibleTimes.FindAll(npt => npt.needy_details_code == currentNeedinessDetails.neediness_details_code).ToList().Select(npt => npt.time_slot).OrderBy(npt => Random.Next()).ToList();
+                //בונה את רשימת כל המשבצות זמן שהנזקק הנוכחי זקוק להם בארגון הזה
+                listOfPossibleTimeSlotsOfCurrentNeedy = listOfNeediesPossibleTimes.FindAll(npt => npt.needy_details_code == currentNeedinessDetails.neediness_details_code).ToList().Select(npt => npt.time_slot).ToList();
 
                 //כל עוד לא עבר את המכסת שעות שהוא זכאי להן
-                for (int i = 0; i < listOfPossibleTimeSlotsOfCurrentNeedy.Count && requiredWeeklyHoursOfNeedy > currentNeedinessDetails.weekly_hours; i++)
+                while(requiredWeeklyHoursOfNeedy>currentNeedinessDetails.weekly_hours)
                 {
-                    var randomIndex = Random.Next(listOfPossibleTimeSlotsOfCurrentNeedy.Count);
-                    var startHour = listOfPossibleTimeSlotsOfCurrentNeedy[randomIndex].start_at_hour;
+                    var randomIndex = RandomIndex(listOfPossibleTimeSlotsOfCurrentNeedy.Count);
+                    
+                    //השעת התחלה מוגרלת מבין השעות האפשריות בטווח שהוגרל לפי זמן התנדבות ממוצע בארגון
+                    var startHour = Random.Next(listOfPossibleTimeSlotsOfCurrentNeedy[randomIndex].start_at_hour, 
+                                                (listOfPossibleTimeSlotsOfCurrentNeedy[randomIndex].end_at_hour-(currentOrg.avg_volunteering_time/15))+1);
 
-                    //רשימת המתנדבים האפשרים בשעה זו
-                    listOfPossibleVolunteersInTheCurrentHour = GetPossibleVolunteersForOrgAndHour(orgCode, startHour);
+                    //רשימת המתנדבים האפשריים בשעה הזאת וביום הזה
+                    listOfPossibleVolunteersInTheCurrentHour = GetPossibleVolunteersForOrgAndHour(startHour, listOfPossibleTimeSlotsOfCurrentNeedy[randomIndex].day_of_week);
                     
                     //אם נמצאו מתנדבים מתאימים לשעה הזאת
                     if (listOfPossibleVolunteersInTheCurrentHour.Count > 0)
@@ -121,20 +127,21 @@ namespace BL
                         timeSlotProperties = new TimeSlotProperties();
                         timeSlotProperties.needy = currentNeedy;
                         timeSlotProperties.volunteer = listOfPossibleVolunteersInTheCurrentHour[randomVolunteerIndex].volunteer;
-                        timeSlotProperties.orgCode = orgCode;
+                        timeSlotProperties.orgCode = currentOrg.org_code;
 
                         //תאריך התחלה שווה לתאריך המוקדם יותר -תחילת פעילות הארגון או היום, אם זה שיבוץ באמצע שנה
-                        timeSlotProperties.time.start_at_date = DateTime.Compare(organization.activity_start_date, DateTime.Today) <= 0 ? organization.activity_start_date : DateTime.Today;
-                        timeSlotProperties.time.end_at_date = organization.activity_end_date;
+                        timeSlotProperties.time.start_at_date = DateTime.Compare(currentOrg.activity_start_date, DateTime.Today) <= 0 ? currentOrg.activity_start_date : DateTime.Today;
+                        timeSlotProperties.time.end_at_date = currentOrg.activity_end_date;
 
                         //שאר המאפיינים לפי המשבצת זמן הנוכחית שמתאימה גם למתנדב וגם לנזקק
                         timeSlotProperties.time.start_at_hour = startHour;
-                        timeSlotProperties.time.end_at_hour = listOfPossibleTimeSlotsOfCurrentNeedy[randomIndex].end_at_hour;
+                        timeSlotProperties.time.end_at_hour = startHour+(currentOrg.avg_volunteering_time/15);
                         timeSlotProperties.time.day_of_week = listOfPossibleTimeSlotsOfCurrentNeedy[randomIndex].day_of_week;
 
                         list.Add(timeSlotProperties);
 
-                        requiredWeeklyHoursOfNeedy -= organization.avg_volunteering_time;
+                        //הורדת סך השעות ששובצו מסך השעות של הנזקק הנוכחי
+                        requiredWeeklyHoursOfNeedy -= (currentOrg.avg_volunteering_time/15);
                     }
                 }
             }
@@ -158,8 +165,38 @@ namespace BL
         public override void Mutate()
         {
             var indexToReplace = RandomIndex(timeSlotsPropertiesList.Count);
-            var slotToReplace = timeSlotsPropertiesList.ElementAt(indexToReplace);
-            var currentNeedinessDetails = listOfNeedinessDetails.Find(nd => nd.organization.org_code == slotToReplace.orgCode && nd.needy_ID == slotToReplace.needy.needy_ID);
+
+            //הגרלת מספר שמציין את פעולת השינוי שמבצעים ברשימה - מחיקת משבצת עדכון משבצת או הוספה
+            var action = RandomIndex(3);
+
+            //פרטי הזדקקות נוכחיים - אם זה מצב הוספה הם מוגרלים ואם שינוי - הם שוים לאלמנט שבאינדקס שהוגרל
+            var currentNeedinessDetails = new neediness_details();
+
+            switch (action)
+            {
+                //מחיקת המשבצת
+                case 0:
+                    timeSlotsPropertiesList.RemoveAt(indexToReplace);
+                    return;
+
+                //עדכון משבצת
+                case 1:
+                    var currentNeedy = timeSlotsPropertiesList.ElementAt(indexToReplace).needy;
+                    currentNeedinessDetails = listOfNeedinessDetails.Find(n=>n.needy_ID==currentNeedy.needy_ID && n.org_code==currentOrg.org_code);
+                    break;
+
+                //הוספת משבצת
+                case 2:
+                    //כאן מגרילים פרטי הזדקקות רלוונטים לארגון, שעליהם מבצעים את ההוספה
+                    timeSlotsPropertiesList.Add(new TimeSlotProperties());
+                    indexToReplace = timeSlotsPropertiesList.Count-1;
+                    var relevantNedinessDetails = listOfNeedinessDetails.FindAll(n => n.org_code == currentOrg.org_code);
+                    var randomNeedinessDetailsIndex = RandomIndex(relevantNedinessDetails.Count);
+                    currentNeedinessDetails = relevantNedinessDetails.ElementAt(randomNeedinessDetailsIndex);
+                    break;
+            }
+
+            //מכאן הקוד מתאים גם להוספה וגם לשינוי
 
             //בונה את רשימת כל המשבצות זמן שהנזקק הנוכחי יכול בהם בארגון הזה
             var listOfPossibleTimeSlotsOfCurrentNeedy = listOfNeediesPossibleTimes.FindAll(npt => npt.needy_details_code == currentNeedinessDetails.neediness_details_code).ToList().Select(npt => npt.time_slot).ToList();
@@ -169,7 +206,7 @@ namespace BL
             var randomTimeSlot = listOfPossibleTimeSlotsOfCurrentNeedy[randomTimeSlotIndex];
 
             //הגרלת מתנדב אקראי שמתאים לזמן ולארגון
-            var listOfPossibleVolunteersInTheCurrentHour = GetPossibleVolunteersForOrgAndHour(currentNeedinessDetails.org_code,randomTimeSlot.start_at_hour);
+            var listOfPossibleVolunteersInTheCurrentHour = GetPossibleVolunteersForOrgAndHour(randomTimeSlot.start_at_hour,randomTimeSlot.day_of_week);
             var randomVolunteerIndex = RandomIndex(listOfPossibleVolunteersInTheCurrentHour.Count);
             var randomVolunteer = listOfPossibleVolunteersInTheCurrentHour[randomVolunteerIndex].volunteer;
 
@@ -188,6 +225,7 @@ namespace BL
             DBConnection dbCon = new DBConnection();
             List<neediness_details> needinessDetailsInOrg = new List<neediness_details>();
             List<volunteering_details> volunteeringDetailsInOrg = new List<volunteering_details>();
+
             public double Evaluate(IChromosome chromosome)
             {
                 double score = 1;
@@ -207,6 +245,7 @@ namespace BL
                     volunteersOfNeedy = volunteersOfNeedy.Distinct().ToList();
                     score -= (item.weekly_hours - currentNeedyHours);
 
+                    //עבור מרחק גדול מעשר דקות יורד ציון
                     foreach (var volunteer in volunteersOfNeedy)
                     {
                         score -= (GoogleMaps.GetDistanceInMinutes(volunteer.volunteer_address, item.needy.needy_address).Result-10);
@@ -250,8 +289,7 @@ namespace BL
                                         .Where(slot => slot.time.end_at_date > DateTime.Today)
                                         .Where(slot => slot.time.day_of_week == current.time.day_of_week)
                                         //בדיקות של שעות התחלה וסיום חופפות - זהות או שאחד מתחיל באמצע השני או שההפרש בינהם קטן משעה
-                                        .Where(slot => slot.time.start_at_hour == current.time.start_at_hour
-                                                  || slot.time.start_at_hour <= current.time.start_at_hour && slot.time.end_at_hour >= current.time.end_at_hour
+                                        .Where(slot => slot.time.start_at_hour <= current.time.start_at_hour && slot.time.end_at_hour >= current.time.end_at_hour
                                                   || current.time.start_at_hour <= slot.time.start_at_hour && current.time.end_at_hour >= slot.time.end_at_hour
                                         ).ToList());
 

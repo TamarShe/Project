@@ -30,7 +30,8 @@ namespace API.Controllers
         [Route("getallpossibletimeslots/{needinessDetailsCode}")]
         public List<TimeSlotModel> GetAllPossibleTimeSlots(int needinessDetailsCode)
         {
-            return needyPossibleTimeBL.GetAllNeedyPossibleTime().Where(t=>t.neediness_details_code==needinessDetailsCode);
+            // return needyPossibleTimeBL.GetAllNeedyPossibleTime().Where(t=>t.neediness_details_code==needinessDetailsCode);
+            return timeSlotBL.GetAllTimeSlot();
         }
 
         [HttpGet]

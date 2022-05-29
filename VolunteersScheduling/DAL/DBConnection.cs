@@ -62,10 +62,5 @@ namespace DAL
                 volunteers_scheduling_DBEntities.SaveChanges();
             }
         }
-
-        public List<time_slot> GetDbSetWithMultiplelncludes<T>(Func<object, object> p1, Func<T, object> p2)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -93,9 +93,6 @@ namespace BL.Classes
             string[,] passwords = new string[0, 2];
             List<string[]> list = new List<string[]>();  
 
-
-            string pathToSave = @"D:\תיקיית הורדות\לימודי תומס\טז אדר א\VolunteersScheduling\API\Content\Files\סיסמאות נזקקים.xlsx";
-
             if (excel.FindColumnsOfNeedy())
             {
                 for (int rCnt = 2; rCnt <= excel.xlWorkSheet.UsedRange.Rows.Count; rCnt++)
