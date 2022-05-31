@@ -20,16 +20,9 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("getallpossibletimeslots/{volunteeringDetailsCode}")]
-        public List<TimeSlotModel> aa(int volunteeringDetailsCode)
+        public List<TimeSlotModel> GetAllPossibleTimeSlots(int volunteeringDetailsCode)
         {
-            List<VolunteerPossibleTimeModel> list = volunteerPossibleHoursBL.GetAllVolunteerPossibleTime().FindAll(n => n.volunteering_details_code == volunteeringDetailsCode);
-            List<TimeSlotModel> listOfAllTimeSlots = timeSlotBL.GetAllTimeSlot();
-            List<TimeSlotModel> listOfTimeSlot = new List<TimeSlotModel>();
-            foreach (var item in list)
-            {
-                listOfTimeSlot.Add(listOfAllTimeSlots.Find(slot => slot.time_slot_code == item.time_slot_code));
-            }
-            return listOfTimeSlot;
+            return volunteerPossibleHoursBL.GetAllPossibleTimeSlots(volunteeringDetailsCode);
         }
 
 
@@ -37,45 +30,14 @@ namespace API.Controllers
         [Route("addListOfPossibleTime/{volunteeringDetailsCode}")]
         public bool AddListOfPossibleTime( int volunteeringDetailsCode, List<TimeSlotModel> listOfTimeSlots)
         {
-            var code = 0;
-            var newVolunteerPossibleTime = new VolunteerPossibleTimeModel();
-            try
-            {         
-                for (int i = 0; i < listOfTimeSlots.Count; i++)
-                {
-                    code = timeSlotBL.InsertTimeSlot(listOfTimeSlots[i]);
-                    newVolunteerPossibleTime = new VolunteerPossibleTimeModel();
-                    newVolunteerPossibleTime.time_slot_code = code;
-                    newVolunteerPossibleTime.volunteering_details_code = volunteeringDetailsCode;
-                    volunteerPossibleHoursBL.InsertVolunteerPossibleTime(newVolunteerPossibleTime);
-                }
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-
+            return volunteerPossibleHoursBL.AddListOfPossibleTime(listOfTimeSlots, volunteeringDetailsCode);
         }
 
         [HttpGet]
         [Route("deleteVolunteerPossibleTimeSlot/{timeSlotCode}")]
         public bool DeleteNeedyPossibleTimeCode(int timeSlotCode)
         {
-            try
-            {
-                VolunteerPossibleTimeModel volunteerPossibleTime = volunteerPossibleHoursBL.GetAllVolunteerPossibleTime().First(n => n.time_slot_code == timeSlotCode);
-                if (volunteerPossibleHoursBL.DeleteVolunteerPossibleTime(volunteerPossibleTime.volunteers_possible_time_code))
-                {
-                    timeSlotBL.DeleteTimeSlot(timeSlotCode);
-                }
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
+            return volunteerPossibleHoursBL.DeleteVolunteerPossibleTimeCode(timeSlotCode);
         }
 
         [HttpGet]

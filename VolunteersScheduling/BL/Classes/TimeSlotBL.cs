@@ -104,38 +104,5 @@ namespace BL.Classes
             return li.Select(l => ConvertTimeSlotToModel(l)).ToList();
         }
         #endregion
-
-        //מקבלת רשימה של זמנים אפשרים לנזקק ומספר שעות התנדבות בארגון ומחזירה רשימה של כל הצירופים האפשרים שיכול להיות לפי הזמן התנדבות
-        //public List<TimeSlotModel> GetListOfDividedTimeSlots(List<TimeSlotModel> listOfTimeSlots, int volunteeringDuration)
-        //{
-        //    List<TimeSlotModel> dividedTimeSlots = new List<TimeSlotModel>();
-        //    var newTimeSlot = new TimeSlotModel();
-        //    TimeSpan start = new TimeSpan();
-        //    TimeSpan end = new TimeSpan();
-        //    TimeSpan currentEnd = new TimeSpan();
-
-        //    foreach (var item in listOfTimeSlots)
-        //    {
-        //        start = item.start_at_hour;
-        //        end = item.end_at_hour;
-        //        TimeSpan duration = TimeSpan.FromMinutes(volunteeringDuration);
-        //        TimeSpan quarter = TimeSpan.FromMinutes(15);
-
-        //        //כל עוד ההפרש בין השעת התחלה לסיום גדול או שווה לזמן ההתנדבות
-        //        while (end.Subtract(start).TotalMinutes >= volunteeringDuration)
-        //        {
-        //            currentEnd = start + duration;
-        //            newTimeSlot = new TimeSlotModel();
-        //            newTimeSlot.start_at_date = item.start_at_date;
-        //            newTimeSlot.end_at_date = item.end_at_date;
-        //            newTimeSlot.day_of_week = item.day_of_week;
-        //            newTimeSlot.start_at_hour = start;
-        //            newTimeSlot.end_at_hour = currentEnd;
-        //            dividedTimeSlots.Add(newTimeSlot);
-        //            start += quarter;
-        //        }
-        //    }
-        //    return dividedTimeSlots;
-        //}
     }
 }

@@ -13,6 +13,8 @@ namespace BL.Classes
         DBConnection dbCon;
         List<MODELS.VolunteerPossibleTimeModel> listOfVolunteerPossibleTime;
 
+        TimeSlotBL timeSlotBL = new TimeSlotBL();
+
         public VolunteerPossibleHoursBL()
         {
             dbCon = new DBConnection();
@@ -26,7 +28,6 @@ namespace BL.Classes
 
         public int InsertVolunteerPossibleTime(MODELS.VolunteerPossibleTimeModel volunteerPossibleTime1)
         {
-            //volunteerPossibleTime1.volunteers_possible_time_code = (listOfVolunteerPossibleTime.Max(a => a.volunteers_possible_time_code)) + 1;
             try
             {
                 dbCon.Execute<volunteer_possible_time>(ConvertVolunteerPossibleTimeToEF(volunteerPossibleTime1), DBConnection.ExecuteActions.Insert);
@@ -100,8 +101,57 @@ namespace BL.Classes
         }
         #endregion
 
+
+        public bool DeleteVolunteerPossibleTimeCode(int timeSlotCode)
+        {
+            try
+            {
+                VolunteerPossibleTimeModel volunteerPossibleTime = GetAllVolunteerPossibleTime().First(t => t.time_slot_code == timeSlotCode);
+                if (this.DeleteVolunteerPossibleTime(volunteerPossibleTime.time_slot_code))
+                {
+                    timeSlotBL.DeleteTimeSlot(timeSlotCode);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool AddListOfPossibleTime(List<TimeSlotModel> listOfTimeSlots, int volunteeringDetailsCode)
+        {
+            int timeSlotCode;
+            var volunteerPosisibleTimeModel = new VolunteerPossibleTimeModel();
+            volunteerPosisibleTimeModel.volunteering_details_code = volunteeringDetailsCode;
+
+            try
+            {
+                foreach (var item in listOfTimeSlots)
+                {
+                    timeSlotCode = timeSlotBL.InsertTimeSlot(item);
+                    volunteerPosisibleTimeModel.time_slot_code = timeSlotCode;
+                    InsertVolunteerPossibleTime(volunteerPosisibleTimeModel);
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public List<TimeSlotModel> GetAllPossibleTimeSlots(int volunteeringDetailsCode)
+        {
+            List<volunteer_possible_time> listOfVolunteerPossibleTime = dbCon.GetDbSetWithIncludes<volunteer_possible_time>(new string[] { "time_slot" });
+            listOfVolunteerPossibleTime = listOfVolunteerPossibleTime.FindAll(t => t.volunteering_details_code == volunteeringDetailsCode);
+            return TimeSlotBL.ConvertListToModel(listOfVolunteerPossibleTime.Select(n => n.time_slot).ToList()).ToList();
+        }
+
         public List<int> GetConflicts(int volunteeringDetailsCode)
         {
+   
+            
             bool findConflicts = false;
             ScheduleBL scheduleBL = new ScheduleBL();
             TimeSlotBL timeSlotBL = new TimeSlotBL();
