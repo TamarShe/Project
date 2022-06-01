@@ -66,4 +66,8 @@ export class ManagerService {
   return this.http.get<Manager[]>(`${this.url}/getAllManagers`);
  }
 
+ startGeneticScheduling(orgCode:number):Observable<boolean>{
+  return this.http.get<boolean>(`${this.url}/startGeneticScheduling/${orgCode}`);
+ }
+
 }

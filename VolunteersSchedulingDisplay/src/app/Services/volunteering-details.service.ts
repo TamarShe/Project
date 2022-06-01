@@ -25,7 +25,6 @@ export class VolunteeringDetailsService {
     return this.http.get<VolunteeringDetails[]>(`${this.url}/GetAllVolunteeringDetailsForVolunteer/${volunteerID}`);
   }
 
-
   UpdatVolunteeringDetails(volunteeringDetails:VolunteeringDetails):Observable<number>
   {
     return this.http.post<number>(`${this.url}/updatevolunteeringdetails`,volunteeringDetails);

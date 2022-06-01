@@ -55,3 +55,10 @@ C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\MODELS\obj\Debug\MODELS.cs
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\MODELS\obj\Debug\MODELS.csproj.CopyComplete
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\MODELS\obj\Debug\MODELS.dll
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\MODELS\obj\Debug\MODELS.pdb
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\MODELS\bin\Debug\Accord.dll.config
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\MODELS\bin\Debug\Accord.dll
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\MODELS\bin\Debug\Accord.Math.Core.dll
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\MODELS\bin\Debug\Accord.Math.dll
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\MODELS\bin\Debug\Accord.xml
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\MODELS\bin\Debug\Accord.Math.xml
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\MODELS\bin\Debug\Accord.Math.Core.xml

@@ -76,3 +76,10 @@ C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\DAL\obj\Debug\DAL.csproj.C
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\DAL\obj\Debug\DAL.dll
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\DAL\obj\Debug\DAL.pdb
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\DAL\bin\Debug\Accord.dll.config
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\DAL\bin\Debug\Accord.dll
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\DAL\bin\Debug\Accord.Math.Core.dll
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\DAL\bin\Debug\Accord.Math.dll
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\DAL\bin\Debug\Accord.xml
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\DAL\bin\Debug\Accord.Math.xml
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\DAL\bin\Debug\Accord.Math.Core.xml

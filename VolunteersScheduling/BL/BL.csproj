@@ -92,7 +92,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BL.cs" />
     <Compile Include="Classes\HoursBL.cs" />
     <Compile Include="Classes\ManagerBL.cs" />
     <Compile Include="Classes\NeedinessDetailsBL.cs" />

@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { Schedule } from './../../Models/Schedule.model';
 import { Volunteer } from './../../Models/Volunteer.model';
 import { VolunteeringDetailsService } from './../../Services/volunteering-details.service';
-import { LoginComponent } from './../login/login.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { VolunteerService } from './../../Services/volunteer.service';
 import { Needy } from './../../Models/Needy.model';
@@ -16,26 +15,19 @@ import { NeedinessDetailsService } from './../../Services/neediness-details.serv
 import { NeedyService } from './../../Services/needy.service';
 import { ActivatedRoute } from '@angular/router';
 import { ScheduleService } from './../../Services/schedule.service';
-import { formatDate, FormStyle, Time } from '@angular/common';
 import { Component, Injectable, OnInit, ViewChild, ElementRef, ContentChild, TemplateRef } from '@angular/core';
 import { CalendarEvent, CalendarView, CalendarModule, CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
-import { EventColor, EventAction } from 'calendar-utils';
 import { addDays, addHours, endOfDay, endOfMonth, parse, startOfDay, sub, subDays } from 'date-fns';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/he';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { title } from 'process';
 import { DatePipe } from '@angular/common'
-import { truncateSync } from 'fs';
-import { runInThisContext } from 'vm';
-import { threadId } from 'worker_threads';
-import { tr } from 'date-fns/locale';
 import {map, startWith} from 'rxjs/operators';
 import { Days } from '../constraints/constraints.component';
 import { FormGroup, FormControl } from '@angular/forms';
-import { time } from 'console';
 import { hours } from 'src/app/Models/Hours.model';
 import { HoursService } from 'src/app/Services/hours.service';
+import { el } from 'date-fns/locale';
 
 registerLocaleData(localeEs);
 
@@ -209,7 +201,17 @@ secondTimeSlot.start_at_date.setDate(this.currentDate.getDate()+6);
 
   GenerateSchedule()
   {
-    this._snackBar.open('המתן בסבלנות לאלגוריתם','X');
+    this.loading=true;
+    this.managerService.startGeneticScheduling(this.user.manager_org_code).subscribe(a=>{
+      if(a){
+       this._snackBar.open('המערכת שובצה בהצלחה','X');
+       this.loading=false;
+      }
+       else{
+       this._snackBar.open('שגיאה בשיבוץ','X');
+       this.loading=false;
+      }
+    })
   }
 
   saveNewTimeSlot(frm:any){

@@ -46,7 +46,7 @@ namespace API.Controllers
         [Route("dis/{or}/{des}")]
         public double GetDistance(string or, string des)
         {
-             return BL.GoogleMaps.GetDistanceInMinutes(or, des).Result;
+            return BL.GoogleMaps.GetDistanceInMinutes(or,des).Result;
         }
 
         [HttpGet]

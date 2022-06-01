@@ -131,5 +131,14 @@ namespace API.Controllers
             }
             return li;
         }
+
+
+        [HttpGet]
+        [Route("startGeneticScheduling/{orgCode}")]
+        public bool StartGeneticScheduling(int orgCode)
+        {
+            managerBL.Gentic(orgCode);
+            return true;
+        }
     }
 }

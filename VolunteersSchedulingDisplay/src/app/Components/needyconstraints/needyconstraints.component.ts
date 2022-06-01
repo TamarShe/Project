@@ -84,7 +84,7 @@ export class NeedyconstraintsComponent {
       this.needinesDetailsService.GetAllNeedinessDetailsForNeedy(this.userId+"").subscribe(n=>{
         this.needinessDetailsConclusion=n;
       });
-      this.hoursService.GetAllHours().subscribe(a=>this.allHours=a)
+      this.hoursService.GetAllHours().subscribe(a=>{this.allHours=a;console.log(this.allHours)})
       this.organizationService.getRelevantOrgsForNeedy(this.userId+"").subscribe(o=>
         this.relevantOrganizations=o);
      setTimeout(() => {
@@ -139,6 +139,8 @@ export class NeedyconstraintsComponent {
                 }, 1000);
               }
             }, 3000);
+
+
    }
 
    DeleteFromDataSource(code:number)

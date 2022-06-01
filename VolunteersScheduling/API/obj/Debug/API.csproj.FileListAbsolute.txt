@@ -310,3 +310,9 @@ C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\API\obj\Debug\API.csproj.C
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\API\obj\Debug\API.csproj.CopyComplete
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\API\obj\Debug\API.dll
 C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\API\obj\Debug\API.pdb
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\API\bin\Accord.dll
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\API\bin\Accord.Math.Core.dll
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\API\bin\Accord.Math.dll
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\API\bin\Accord.xml
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\API\bin\Accord.Math.xml
+C:\Users\IMOE001\Desktop\Project\VolunteersScheduling\API\bin\Accord.Math.Core.xml

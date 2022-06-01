@@ -11,36 +11,6 @@
     </mat-form-field>
     <br>
 
-    <!-- <mat-label>בחר שעות</mat-label>
-      <mat-select [formControl]="hours" multiple>
-        <mat-option  style="direction: rtl;" *ngFor="let hour of listOfHours" [value]="hour.start + '-' + hour.end"  (click)="updateHoursSelection(hour.code)">{{hour.start.at_hour}} - {{hour.end.at_hour}}</mat-option>
-      </mat-select> -->
-      <!-- <div> שעות מסוימות
-        <mat-form-field  class="hours">
-          <mat-label>שעת התחלה</mat-label>
-          <8input name="startHour" type="time" [(ngModel)]="startHour" matInput >
-        </mat-form-field>
-        <mat-form-field class="hours">
-          <mat-label>שעת סיום</mat-label>
-          <input name="endHour" type="time" [(ngModel)]="endHour" matInput >
-        </mat-form-field>
-        <br>
-        <label>שים לב - מספר הדקות שתבחר יתעגל לרבע השעה הקרובה</label>
-      </div> -->
-
-      <!-- <div> שעות מסוימות
-        <mat-form-field  class="hours">
-          <mat-label>שעת התחלה</mat-label>
-          <input name="startHour" type="time" [(ngModel)]="startHour" matInput >
-        </mat-form-field>
-        <mat-form-field class="hours">
-          <mat-label>שעת סיום</mat-label>
-          <input name="endHour" type="time" [(ngModel)]="endHour" matInput >
-        </mat-form-field>
-        <br>
-        <label>שים לב - מספר הדקות שתבחר יתעגל לרבע השעה הקרובה</label>
-      </div> -->
-
       <div style="font-size: small;text-align: center;width:300px;margin-right: 120px;">
       <mat-label style="margin:15px;font-size: medium !important;">בין השעות: </mat-label>
       <mat-icon style="cursor:'pointer';color: rgb(245, 4, 133);" (click)="addHour()">playlist_add</mat-icon>
@@ -87,7 +57,7 @@
           <mat-icon>delete</mat-icon>
         </button>
       </td>
-      <td>ביום {{days[timeslot.day_of_week-1].name}}, בין השעות {{allHours[timeslot.start_at_hour-1].at_hour.toString().substring(0,5)}} - {{allHours[timeslot.end_at_hour-1].at_hour.toString().substring(0,5)}}</td>
+         <td>ביום {{days[timeslot.day_of_week-1].name}}, בין השעות {{allHours[timeslot.start_at_hour-1].at_hour.toString().substring(0,5)}} - {{allHours[timeslot.end_at_hour-1].at_hour.toString().substring(0,5)}}</td>
        </tr>
     </tbody>
   </table>
