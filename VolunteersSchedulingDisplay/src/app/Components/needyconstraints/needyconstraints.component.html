@@ -8,12 +8,17 @@
           {{org.org_name}}
         </mat-option>
       </mat-select>
-    </mat-form-field>
+  </mat-form-field>
+    <mat-label *ngIf="selectedNeedinessDetails" style="font-size: small;margin: 10px;">בארגון זה אתה זכאי ל {{selectedNeedinessDetails.weekly_hours}} שעות</mat-label>
+
     <br>
 
       <div style="font-size: small;text-align: center;width:300px;margin-right: 120px;">
       <mat-label style="margin:15px;font-size: medium !important;">בין השעות: </mat-label>
       <mat-icon style="cursor:'pointer';color: rgb(245, 4, 133);" (click)="addHour()">playlist_add</mat-icon>
+      <br>
+      <mat-label *ngIf="showHoursComment" style="color: red;">הגעת לכמות המקסימלית. מחק שעות כדי להוסיף</mat-label>
+
       <div style="overflow-y: auto;max-height: 150px;">
       <div *ngFor="let item of listOfHours">
       <mat-form-field class="hours">

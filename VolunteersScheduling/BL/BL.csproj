@@ -103,6 +103,7 @@
     <Compile Include="Classes\VolunteerBL.cs" />
     <Compile Include="Classes\VolunteeringDetailsBL.cs" />
     <Compile Include="Classes\VolunteerPossibleHoursBL.cs" />
+    <Compile Include="GeneticScheduling.cs" />
     <Compile Include="GoogleMaps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadExcel.cs" />

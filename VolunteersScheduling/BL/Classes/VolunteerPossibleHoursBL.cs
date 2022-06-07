@@ -148,27 +148,27 @@ namespace BL.Classes
             return TimeSlotBL.ConvertListToModel(listOfVolunteerPossibleTime.Select(n => n.time_slot).ToList()).ToList();
         }
 
-        public List<int> GetConflicts(int volunteeringDetailsCode)
+        public int GetConflicts(int volunteeringDetailsCode)
         {
-   
-            
-            bool findConflicts = false;
-            ScheduleBL scheduleBL = new ScheduleBL();
-            TimeSlotBL timeSlotBL = new TimeSlotBL();
-            List<TimeSlotModel> allTimeSlots = timeSlotBL.GetAllTimeSlot();
-            List<ScheduleModel> vScehduleStarts = scheduleBL.GetAllSchedule().FindAll(a => a.volunteering_details_code == volunteeringDetailsCode).ToList();
-            List<VolunteerPossibleTimeModel> vPossibleTimeStarts = GetAllVolunteerPossibleTime().FindAll(v => v.volunteering_details_code == volunteeringDetailsCode).ToList();
-            List<TimeSlotModel> slotsOfSchedule = new List<TimeSlotModel>();
-            List<TimeSlotModel> slotsOfPossibleTime =new List<TimeSlotModel>();
-            //foreach (var item in allTimeSlots)
-            //{
-            //    if(slotsOfSchedule.Find(a=>a.start_at_hour==))
-            //}
+            var listOfSchedule = dbCon.GetDbSetWithIncludes<schedule>(new string[] { "volunteering_details.time_slot" }).AsQueryable();
+            int conflictsCounter = 0;
+            var GetOverLaps = new Func<schedule, List<schedule>>(current =>
+                                 listOfSchedule.Except(new[] { current })
+                                       .Where(slot => slot.volunteering_details_code == current.volunteering_details_code
+                                                 || slot.neediness_details_code == current.neediness_details_code)
+                                       .Where(slot => slot.time_slot.end_at_date > DateTime.Today)
+                                       .Where(slot => slot.time_slot.day_of_week == current.time_slot.day_of_week)
+                                       //בדיקות של שעות התחלה וסיום חופפות - זהות או שאחד מתחיל באמצע השני או שההפרש בינהם קטן משעה
+                                       .Where(slot => slot.time_slot.start_at_hour <= current.time_slot.start_at_hour && slot.time_slot.end_at_hour >= current.time_slot.start_at_hour
+                                                 || current.time_slot.start_at_hour <= slot.time_slot.start_at_hour && current.time_slot.end_at_hour >= slot.time_slot.start_at_hour
+                                                 || current.time_slot.start_at_hour == slot.time_slot.start_at_hour
+                                                 || current.time_slot.end_at_hour == slot.time_slot.end_at_hour).ToList());
 
-
-            //לגמור את זה ולהעתיק לזמן נזקק
-            //return slotsOfSchedule.Intersect(slotsOfPossibleTime).Count()>0;
-            return new List<int>();
+            foreach (var item in listOfSchedule)
+            {
+                conflictsCounter += GetOverLaps(item).Count;
+            }
+            return conflictsCounter;
         }
     }
 }

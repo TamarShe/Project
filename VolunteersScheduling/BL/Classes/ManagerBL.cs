@@ -121,14 +121,13 @@ namespace BL.Classes
             {
                 item.time_slot.end_at_date = DateTime.Today;
                 dBConnection.Execute<time_slot>(item.time_slot, DBConnection.ExecuteActions.Update);
-
-                //dBConnection.Execute<schedule>(item, DBConnection.ExecuteActions.Delete);
             }
 
-            Population population = new Population(300, new TimeTableChromosome(dBConnection, orgCode), new TimeTableChromosome.FitnessFunction(), new EliteSelection());
+            Population population = new Population(300, new GeneticScheduling(dBConnection, orgCode), new GeneticScheduling.FitnessFunction(), new EliteSelection());
             int i = 0;
             while (true)
             {
+                
                 population.RunEpoch();
                 i++;
                 if (population.FitnessMax >= 0.99 || i >= 1000)
@@ -137,7 +136,7 @@ namespace BL.Classes
                 }
             }
 
-            List<TimeSlotProperties> value = (population.BestChromosome as TimeTableChromosome).timeSlotsPropertiesList.ToList();
+            List<TimeSlotProperties> value = (population.BestChromosome as GeneticScheduling).timeSlotsPropertiesList.ToList();
 
             //הכנסת פרטי השיבוץ למסד הנתונים
             schedule newScheduleSlot = new schedule();

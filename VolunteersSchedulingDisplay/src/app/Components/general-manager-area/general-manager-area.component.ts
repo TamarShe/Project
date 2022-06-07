@@ -35,6 +35,7 @@ export class GeneralManagerAreaComponent{
 
   constructor(public matDialog:MatDialog,private location:Location,private route:ActivatedRoute,private router:Router,private managerService:ManagerService,private organizationService:OrganizationService,private _snackBar:MatSnackBar,private volunteerService:VolunteerService,private volunteeringDetailsService:VolunteeringDetailsService){
       this.route.paramMap.subscribe(b=>{this.userID= b.get("userid");console.log(this.userID)});
+      this.orgStatus='add';
       setTimeout(() => {
       this.buildTable()
     }, 2000);
@@ -54,6 +55,7 @@ export class GeneralManagerAreaComponent{
     UpdateOrganization(frm:any)
     {
       this.organizationService.updateOranization(this.organization);
+      this.orgStatus='update';
     }
 
     //מנתב לפרטי המנהל שמשויך לארגון הזה
@@ -102,6 +104,7 @@ export class GeneralManagerAreaComponent{
             if(a!=0){
               this._snackBar.open('נשמר בהצלחה!','X');
               this.organization=new Organization();
+              this.orgStatus='add';
             }
           else
               this._snackBar.open('שגיאה בשמירה','X');

@@ -49,7 +49,7 @@
   <h2> הזמנים שאני יכול בהם בארגון זה</h2>
   <img src="../../../assets/dots.gif" *ngIf="loading" />
   <br>
-  <button name="stayInCurrentSchedule" mat-raised-button color="accent" style="margin:7px;" *ngIf="showChangesButtons">הישאר במערכת הנוכחית</button>
+  <button name="stayInCurrentSchedule" mat-raised-button color="accent" style="margin:7px;" *ngIf="showChangesButtons" (click)="showChangesButtons=false">הישאר במערכת הנוכחית</button>
   <button name="leaveTheCurrentSchedule" mat-raised-button color="accent"  *ngIf="showChangesButtons">בטל את המערכת שלי עד לשיבוץ הבא</button>
   <table *ngIf="!loading">
     <tbody >

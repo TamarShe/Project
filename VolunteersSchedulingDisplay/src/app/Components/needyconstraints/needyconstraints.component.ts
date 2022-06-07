@@ -55,6 +55,7 @@ export class NeedyconstraintsComponent {
   needinessDetailsConclusion:NeedinessDetails[]=[];
   selectedNeedinessDetails!:NeedinessDetails;
   listOfTimeSlots:TimeSlot[]=[];
+  showHoursComment=false;
 
   allHours:hours[]=[];
 
@@ -111,6 +112,8 @@ export class NeedyconstraintsComponent {
    async saveConstraints(frm:any)
    {
       this.loading=true;
+      var selectedHoursCounter=0;
+      this.dataSource.forEach(slot=>selectedHoursCounter+=((slot.end_at_hour-slot.start_at_hour)/15));
       this.listOfHours.forEach(hour=>{
           this.days.forEach(day =>
             {
@@ -124,9 +127,14 @@ export class NeedyconstraintsComponent {
                   end_at_hour:hour.end.hour_code,
                   day_of_week:day.code
                 })
+                selectedHoursCounter+=((hour.end.hour_code-hour.start.hour_code)/15)
               }
             })})
-
+            console.log(selectedHoursCounter)
+            if(selectedHoursCounter>this.selectedNeedinessDetails.weekly_hours){
+              this.showHoursComment=true;
+              this.listOfTimeSlots=[];}
+            if(!this.showHoursComment){
             setTimeout(() => {
               if(this.listOfTimeSlots.length>0){
                 console.log(this.listOfTimeSlots)
@@ -138,9 +146,7 @@ export class NeedyconstraintsComponent {
                   this.ToShowChangesButtons();
                 }, 1000);
               }
-            }, 3000);
-
-
+            }, 3000);}
    }
 
    DeleteFromDataSource(code:number)

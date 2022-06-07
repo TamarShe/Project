@@ -74,6 +74,8 @@ export class ScheduleComponent implements OnInit{
   needies!:Needy[];
   filteredNeedies!: Observable<Needy[]>;
   allHours:hours[]=[];
+  date1:Date=new Date();
+  date2:Date=new Date();
 
 
   days:Days[]=[

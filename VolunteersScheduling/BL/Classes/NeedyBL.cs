@@ -29,6 +29,8 @@ namespace BL.Classes
 
         public string InsertNeedy(MODELS.NeedyModel needy1)
         {
+            if(listOfNeedies.Find(n=>n.needy_ID==needy1.needy_ID)!=null)
+                return needy1.needy_ID;
             try
             {
                 dbCon.Execute<needy>(ConvertNeedyToEF(needy1),
