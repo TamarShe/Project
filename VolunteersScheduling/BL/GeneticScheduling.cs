@@ -149,7 +149,6 @@ namespace BL
                 for (int i = 0; i < listOfRequiredTimeSlotsOfCurrentNeedy.Count; i++)
                 {
                     listOfShiftsOfNeedy.AddRange(DivideSlotToShifts(listOfRequiredTimeSlotsOfCurrentNeedy[i]));
-
                 }
 
                 //עבור כל אחת מהמשמרות
@@ -241,7 +240,6 @@ namespace BL
                 {
                     volunteersOfNeedy = values.FindAll(slot => slot.needy.needy_ID == item.needy_ID).Select(slot => slot.volunteer).ToList();
 
-
                    // כל המתנדבים ששובצו לנזקק בלי כפיליות כדי לחשב אם מתאימים מבחינת כתובות
                     volunteersOfNeedy = volunteersOfNeedy.Distinct().ToList();
                     double dis = 0;
@@ -252,7 +250,6 @@ namespace BL
                         score -= (dis - 10.0);
                     }
                 }
-
                 #endregion
 
                 #region בדיקה של מספר שעות מתאים למתנדב
