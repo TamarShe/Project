@@ -28,9 +28,13 @@ export class VolunteerPossibleTimeService {
     return this.http.get<boolean>(`${this.url}/deleteVolunteerPossibleTimeSlot/${timeSlotCode}`);
   }
 
-  VolunteerHasScheduleInVolunteeringDetails(voluntteringDetailsCode:number):Observable<boolean>
+  VolunteerHasConflicts(voluntteringDetailsCode:number):Observable<number>
   {
-    return this.http.get<boolean>(`${this.url}/VolunteerHasScheduleInVolunteeringDetails/${voluntteringDetailsCode}`);
+    return this.http.get<number>(`${this.url}/VolunteerHasConflicts/${voluntteringDetailsCode}`);
   }
 
+  DeleteConflics(voluntteringDetailsCode:number):Observable<number>
+  {
+    return this.http.get<number>(`${this.url}/DeleteConflicts/${voluntteringDetailsCode}`);
+  }
 }

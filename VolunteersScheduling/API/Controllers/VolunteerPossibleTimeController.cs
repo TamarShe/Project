@@ -41,10 +41,17 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Route("VolunteerHasScheduleInVolunteeringDetails/{volunteeringDetailsCode}")]
-        public bool VolunteerHasScheduleInVolunteeringDetails(int volunteeringDetailsCode)
+        [Route("VolunteerHasConflicts/{volunteeringDetailsCode}")]
+        public int VolunteerHasConflicts(int volunteeringDetailsCode)
         {
-            return volunteerPossibleHoursBL.GetConflicts(volunteeringDetailsCode)!=null;
+            return volunteerPossibleHoursBL.GetConflicts(volunteeringDetailsCode);
+        }
+
+        [HttpGet]
+        [Route("DeleteConflicts/{volunteeringDetailsCode}")]
+        public bool DeleteConflicts(int volunteeringDetailsCode)
+        {
+            return volunteerPossibleHoursBL.DeleteConflicts(volunteeringDetailsCode);
         }
     }
 }

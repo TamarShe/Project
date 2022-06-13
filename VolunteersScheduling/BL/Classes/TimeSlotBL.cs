@@ -104,5 +104,7 @@ namespace BL.Classes
             return li.Select(l => ConvertTimeSlotToModel(l)).ToList();
         }
         #endregion
+
+
     }
 }

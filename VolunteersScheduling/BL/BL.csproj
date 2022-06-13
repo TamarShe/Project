@@ -107,9 +107,9 @@
     <Compile Include="GoogleMaps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadExcel.cs" />
+    <Compile Include="ScheduleGene.cs" />
     <Compile Include="SendEmail.cs" />
     <Compile Include="TimeSlotProperties.cs" />
-    <Compile Include="TimeTableChromosome.cs" />
     <Compile Include="VolunteersSchedulingBL.cs" />
   </ItemGroup>
   <ItemGroup>

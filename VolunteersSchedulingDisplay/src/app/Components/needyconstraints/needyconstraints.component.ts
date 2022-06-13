@@ -131,7 +131,7 @@ export class NeedyconstraintsComponent {
               }
             })})
             console.log(selectedHoursCounter)
-            if(selectedHoursCounter>this.selectedNeedinessDetails.weekly_hours){
+            if(selectedHoursCounter>this.selectedNeedinessDetails.weekly_hours+1){
               this.showHoursComment=true;
               this.listOfTimeSlots=[];}
             if(!this.showHoursComment){
@@ -154,6 +154,7 @@ export class NeedyconstraintsComponent {
       this.needyPossibleTimeService.deletepossibletimeSlot(code).subscribe(a=>
         {setTimeout(()=>{
           this.buildTable(this.selectedNeedinessDetails.neediness_details_code);
+          this.ToShowChangesButtons();
           this.loading=false;
         },3000);}
       );
@@ -201,8 +202,8 @@ export class NeedyconstraintsComponent {
    }
 
    ToShowChangesButtons(){
-      this.needyPossibleTimeService.NeedyHasScheduleInVolunteeringDetails(this.selectedNeedinessDetails.neediness_details_code).subscribe(a=>{
-        this.showChangesButtons=a;
+      this.needyPossibleTimeService.NeedyHasConflics(this.selectedNeedinessDetails.neediness_details_code).subscribe(a=>{
+        if(a>0) this.showChangesButtons=true;
       })
    }
 
@@ -227,5 +228,15 @@ export class NeedyconstraintsComponent {
       start:new hours,
       end:new hours
     })
+  }
+
+  deleteConflicts(){
+    this.needyPossibleTimeService.DeleteConflics(this.selectedNeedinessDetails.neediness_details_code).subscribe(a=>
+      {
+        if(a) {
+        this._snackBar.open('הקונפליקטים נמחקו בהצלחה');
+        this.showChangesButtons=false;
+      }}
+    )
   }
 }

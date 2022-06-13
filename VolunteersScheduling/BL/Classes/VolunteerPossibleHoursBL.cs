@@ -118,6 +118,12 @@ namespace BL.Classes
             }
             return true;
         }
+        public List<TimeSlotModel> GetAllPossibleTimeSlots(int volunteeringDetailsCode)
+        {
+            List<volunteer_possible_time> listOfVolunteerPossibleTime = dbCon.GetDbSetWithIncludes<volunteer_possible_time>(new string[] { "time_slot" });
+            listOfVolunteerPossibleTime = listOfVolunteerPossibleTime.FindAll(t => t.volunteering_details_code == volunteeringDetailsCode);
+            return TimeSlotBL.ConvertListToModel(listOfVolunteerPossibleTime.Select(n => n.time_slot).ToList()).ToList();
+        }
 
         public bool AddListOfPossibleTime(List<TimeSlotModel> listOfTimeSlots, int volunteeringDetailsCode)
         {
@@ -141,34 +147,48 @@ namespace BL.Classes
             }
         }
 
-        public List<TimeSlotModel> GetAllPossibleTimeSlots(int volunteeringDetailsCode)
-        {
-            List<volunteer_possible_time> listOfVolunteerPossibleTime = dbCon.GetDbSetWithIncludes<volunteer_possible_time>(new string[] { "time_slot" });
-            listOfVolunteerPossibleTime = listOfVolunteerPossibleTime.FindAll(t => t.volunteering_details_code == volunteeringDetailsCode);
-            return TimeSlotBL.ConvertListToModel(listOfVolunteerPossibleTime.Select(n => n.time_slot).ToList()).ToList();
-        }
 
         public int GetConflicts(int volunteeringDetailsCode)
         {
-            var listOfSchedule = dbCon.GetDbSetWithIncludes<schedule>(new string[] { "volunteering_details.time_slot" }).AsQueryable();
-            int conflictsCounter = 0;
-            var GetOverLaps = new Func<schedule, List<schedule>>(current =>
-                                 listOfSchedule.Except(new[] { current })
-                                       .Where(slot => slot.volunteering_details_code == current.volunteering_details_code
-                                                 || slot.neediness_details_code == current.neediness_details_code)
-                                       .Where(slot => slot.time_slot.end_at_date > DateTime.Today)
-                                       .Where(slot => slot.time_slot.day_of_week == current.time_slot.day_of_week)
-                                       //בדיקות של שעות התחלה וסיום חופפות - זהות או שאחד מתחיל באמצע השני או שההפרש בינהם קטן משעה
-                                       .Where(slot => slot.time_slot.start_at_hour <= current.time_slot.start_at_hour && slot.time_slot.end_at_hour >= current.time_slot.start_at_hour
-                                                 || current.time_slot.start_at_hour <= slot.time_slot.start_at_hour && current.time_slot.end_at_hour >= slot.time_slot.start_at_hour
-                                                 || current.time_slot.start_at_hour == slot.time_slot.start_at_hour
-                                                 || current.time_slot.end_at_hour == slot.time_slot.end_at_hour).ToList());
+            var listOfSchedule = dbCon.GetDbSetWithIncludes<schedule>(new string[] { "time_slot" })
+                                      .FindAll(s=>s.volunteering_details_code==volunteeringDetailsCode)
+                                      .ToList();
 
-            foreach (var item in listOfSchedule)
+            var listOfPossibleTime = dbCon.GetDbSetWithIncludes<volunteer_possible_time>(new string[] { "time_slot" })
+                                          .FindAll(vpt => vpt.volunteering_details_code == volunteeringDetailsCode)
+                                          .ToList();
+            int conflictsCounter = 0;
+
+            foreach (var schedule in listOfSchedule)
             {
-                conflictsCounter += GetOverLaps(item).Count;
+                foreach (var possibleTime in listOfPossibleTime)
+                {
+                    if (!GeneticScheduling.CheckIfSlotsAreOverlaps(schedule.time_slot, possibleTime.time_slot))
+                        conflictsCounter++;
+                }
             }
             return conflictsCounter;
+        }
+
+        public bool DeleteConflicts(int volunteeringDetailsCode)
+        {
+            var listOfSchedule = dbCon.GetDbSetWithIncludes<schedule>(new string[] { "time_slot" })
+                                      .FindAll(s => s.volunteering_details_code == volunteeringDetailsCode)
+                                      .ToList();
+
+            var listOfPossibleTime = dbCon.GetDbSetWithIncludes<volunteer_possible_time>(new string[] { "time_slot" })
+                                          .FindAll(vpt => vpt.volunteering_details_code == volunteeringDetailsCode)
+                                          .ToList();
+
+            foreach (var schedule in listOfSchedule)
+            {
+                foreach (var possibleTime in listOfPossibleTime)
+                {
+                    if (!GeneticScheduling.CheckIfSlotsAreOverlaps(schedule.time_slot, possibleTime.time_slot))
+                        this.DeleteToDB<schedule>(schedule);
+                }
+            }
+            return true;
         }
     }
 }

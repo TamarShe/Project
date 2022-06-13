@@ -48,5 +48,19 @@ namespace API.Controllers
         {
             return needyPossibleTimeBL.AddListOfPossibleTime(listOfTimeSlots,needinessDetailsCode);
         }
+
+        [HttpGet]
+        [Route("NeedyHasConflics/{needinessDetailsCode}")]
+        public int NeedyHasConflics(int needinessDetailsCode)
+        {
+            return needyPossibleTimeBL.GetConflicts(needinessDetailsCode);
+        }
+
+        [HttpGet]
+        [Route("DeleteConflicts/{needinessDetailsCode}")]
+        public bool DeleteConflicts(int needinessDetailsCode)
+        {
+            return needyPossibleTimeBL.DeleteConflicts(needinessDetailsCode);
+        }
     }
 }

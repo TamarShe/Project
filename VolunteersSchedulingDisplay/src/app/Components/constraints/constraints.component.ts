@@ -144,6 +144,7 @@ export class ConstraintsComponent {
       this.volunteerPossibleTimeService.deletepossibletimeSlot(code).subscribe(a=>
         {setTimeout(()=>{
           this.buildTable(this.selectedVolunteeringDetails.volunteering_details_code);
+          this.ToShowChangesButtons();
           this.loading=false;
         },3000);}
       );
@@ -191,8 +192,8 @@ export class ConstraintsComponent {
    }
 
    ToShowChangesButtons(){
-      this.volunteerPossibleTimeService.VolunteerHasScheduleInVolunteeringDetails(this.selectedVolunteeringDetails.volunteering_details_code).subscribe(a=>{
-        this.showChangesButtons=a;
+      this.volunteerPossibleTimeService.VolunteerHasConflicts(this.selectedVolunteeringDetails.volunteering_details_code).subscribe(a=>{
+        if(a>0)this.showChangesButtons=true;
       })
    }
 
@@ -217,5 +218,16 @@ export class ConstraintsComponent {
       start:new hours,
       end:new hours
     })
+  }
+
+  
+  deleteConflicts(){
+    this.volunteerPossibleTimeService.DeleteConflics(this.selectedVolunteeringDetails.volunteering_details_code).subscribe(a=>
+      {
+        if(a) {
+        this._snackBar.open('הקונפליקטים נמחקו בהצלחה');
+        this.showChangesButtons=false;
+      }}
+    )
   }
 }

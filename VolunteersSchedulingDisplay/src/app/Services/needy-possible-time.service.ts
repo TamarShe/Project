@@ -32,8 +32,14 @@ export class NeedyPossibleTimeService {
   {
     return this.http.get<boolean>(`${this.url}/deleteNeedyPossibleTimeSlot/${timeSlotCode}`);
   }
-  NeedyHasScheduleInVolunteeringDetails(needinessDetailscode:number):Observable<boolean>
+
+  NeedyHasConflics(needinessDetailscode:number):Observable<number>
   {
-    return this.http.get<boolean>(`${this.url}/NeedyHasScheduleInNeedinessDetails/${needinessDetailscode}`);
+    return this.http.get<number>(`${this.url}/NeedyHasConflics/${needinessDetailscode}`);
+  }
+
+  DeleteConflics(needinessDetailscode:number):Observable<number>
+  {
+    return this.http.get<number>(`${this.url}/DeleteConflicts/${needinessDetailscode}`);
   }
 }

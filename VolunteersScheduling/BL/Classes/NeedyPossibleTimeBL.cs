@@ -147,5 +147,49 @@ namespace BL.Classes
             listOfNeedyPossibleTime = listOfNeedyPossibleTime.FindAll(t => t.needy_details_code == needinessDetailsCode);
             return TimeSlotBL.ConvertListToModel(listOfNeedyPossibleTime.Select(n=>n.time_slot).ToList()).ToList();
         }
+
+
+        public int GetConflicts(int needinessDetailsCode)
+        {
+            var listOfSchedule = dbCon.GetDbSetWithIncludes<schedule>(new string[] { "time_slot" })
+                                      .FindAll(s => s.neediness_details_code == needinessDetailsCode)
+                                      .ToList();
+
+            var listOfPossibleTime = dbCon.GetDbSetWithIncludes<needy_possible_time>(new string[] { "time_slot" })
+                                          .FindAll(vpt => vpt.needy_details_code == needinessDetailsCode)
+                                          .ToList();
+            int conflictsCounter = 0;
+
+            foreach (var schedule in listOfSchedule)
+            {
+                foreach (var possibleTime in listOfPossibleTime)
+                {
+                    if (!GeneticScheduling.CheckIfSlotsAreOverlaps(schedule.time_slot, possibleTime.time_slot))
+                        conflictsCounter++;
+                }
+            }
+            return conflictsCounter;
+        }
+
+        public bool DeleteConflicts(int needinessDetailsCode)
+        {
+            var listOfSchedule = dbCon.GetDbSetWithIncludes<schedule>(new string[] { "time_slot" })
+                                      .FindAll(s => s.neediness_details_code == needinessDetailsCode)
+                                      .ToList();
+
+            var listOfPossibleTime = dbCon.GetDbSetWithIncludes<needy_possible_time>(new string[] { "time_slot" })
+                                          .FindAll(npt => npt.needy_details_code == needinessDetailsCode)
+                                          .ToList();
+
+            foreach (var schedule in listOfSchedule)
+            {
+                foreach (var possibleTime in listOfPossibleTime)
+                {
+                    if (!GeneticScheduling.CheckIfSlotsAreOverlaps(schedule.time_slot, possibleTime.time_slot))
+                        this.DeleteToDB<schedule>(schedule);
+                }
+            }
+            return true;
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace BL.Classes
             dbCon = new DBConnection();
             listOfManagers =ConvertListToModel(dbCon.GetDbSet<manager>().ToList());
         }
-
+        #region get add update delete
         public List<MODELS.ManagerModel> GetAllManagers()
         {
             return listOfManagers;
@@ -75,8 +75,8 @@ namespace BL.Classes
                     return false;
                 }
             return false;
-        } 
-
+        }
+        #endregion
         #region convert functions
         public static manager ConvertManagerToEF(MODELS.ManagerModel m)
         {
@@ -111,20 +111,70 @@ namespace BL.Classes
         }
         #endregion
 
+        #region genetic
         public void Gentic(int orgCode)
         {
             DBConnection dBConnection = new DBConnection();
+            int i = 0;
 
             //עדכון הלוח הקיים של הארגון שכל מה שיש עד עכשיו יגמר בתאריך של היום כי מעכשיו תהיה מערכת חדשה
-            List<schedule> scheduleToDelete = dBConnection.GetDbSetWithIncludes<schedule>(new string[] { "neediness_details.organization","time_slot" }).FindAll(s => s.neediness_details.organization.org_code == orgCode).ToList();
+            List<schedule> scheduleToDelete = dBConnection.GetDbSetWithIncludes<schedule>(new string[] { "neediness_details.organization","time_slot" })
+                                                          .FindAll(s => s.neediness_details.organization.org_code == orgCode)
+                                                          .ToList();
+
             foreach (var item in scheduleToDelete)
             {
                 item.time_slot.end_at_date = DateTime.Today;
                 dBConnection.Execute<time_slot>(item.time_slot, DBConnection.ExecuteActions.Update);
             }
 
-            Population population = new Population(300, new GeneticScheduling(dBConnection, orgCode), new GeneticScheduling.FitnessFunction(), new EliteSelection());
-            int i = 0;
+            List<organization> listOfOrganizations = dBConnection.GetDbSet<organization>().ToList();
+            var currentOrg = listOfOrganizations.Find(org => org.org_code == orgCode);
+
+            List<schedule> listOfSchedule = dBConnection.GetDbSetWithIncludes<schedule>(new string[] { "time_slot", "volunteering_details.volunteer", "neediness_details.needy" }).ToList();
+            List<volunteer_possible_time> listOfVolunteersPossibleTime = dBConnection.GetDbSetWithIncludes<volunteer_possible_time>(new string[] { "volunteering_details.volunteer", "time_slot" })
+                                                                                     .ToList()
+                                                                                     .FindAll(vpt => vpt.volunteering_details.org_code == currentOrg.org_code)
+                                                                                     .ToList();
+
+            //המילון
+            List<volunteer>[,] volunteersPossibleTimeDictionary = new List<volunteer>[7, 96];
+
+            //איתחול הרשימות במילון
+            for (i = 0; i < 7; i++)
+            {
+                for (int j = 0; j < 96; j++)
+                {
+                    volunteersPossibleTimeDictionary[i, j] = new List<volunteer>();
+                }
+            }
+
+            List<volunteer_possible_time> listOfVolunteersPossibleTimeInCurrentOrg = listOfVolunteersPossibleTime.FindAll(vpt => vpt.volunteering_details.org_code == currentOrg.org_code)
+                                                                                                                 .ToList();
+            //מכניס למילון את כל המתנדבים האפשריים לכל שעה
+            foreach (var volunteerPossibleTime in listOfVolunteersPossibleTimeInCurrentOrg)
+            {
+                for (i = volunteerPossibleTime.time_slot.start_at_hour; i < volunteerPossibleTime.time_slot.end_at_hour - (currentOrg.avg_volunteering_time / 15); i++)
+                {
+                    volunteersPossibleTimeDictionary[volunteerPossibleTime.time_slot.day_of_week - 1, i - 1].Add(volunteerPossibleTime.volunteering_details.volunteer);
+                }
+            }
+
+            //מוריד מהמילון את כל המשבצות שכבר תפוסות
+            foreach (var scheduleSlot in listOfSchedule)
+            {
+                for (i = scheduleSlot.time_slot.start_at_hour - 1; i <= scheduleSlot.time_slot.end_at_hour - 1; i++)
+                {
+                    if (volunteersPossibleTimeDictionary[scheduleSlot.time_slot.day_of_week - 1, i].Contains(scheduleSlot.volunteering_details.volunteer))
+                    {
+                        volunteersPossibleTimeDictionary[scheduleSlot.time_slot.day_of_week - 1, i].Remove(scheduleSlot.volunteering_details.volunteer);
+                    }
+                }
+            }
+
+            //הפעלת האלגוריתם הגנטי
+            Population population = new Population(300, new GeneticScheduling(dBConnection, orgCode, volunteersPossibleTimeDictionary), new GeneticScheduling.FitnessFunction(), new EliteSelection());
+
             while (true)
             {
                 
@@ -136,7 +186,8 @@ namespace BL.Classes
                 }
             }
 
-            List<TimeSlotProperties> value = (population.BestChromosome as GeneticScheduling).timeSlotsPropertiesList.ToList();
+            List<ScheduleGene> value = (population.BestChromosome as GeneticScheduling).timeSlotsChromosome.ToList();
+            List<ScheduleGene> noVolunteers = (population.BestChromosome as GeneticScheduling).noVolunteers.ToList();
 
             //הכנסת פרטי השיבוץ למסד הנתונים
             schedule newScheduleSlot = new schedule();
@@ -145,7 +196,56 @@ namespace BL.Classes
             List<neediness_details> listOfNeedinessDetails = dbCon.GetDbSet<neediness_details>();
             List<volunteering_details> listOfVolunteeringDetails = dbCon.GetDbSet<volunteering_details>();
 
+            //הכנסה של אלו שנמצא להם מתנדב
             foreach (var item in value)
+            {
+                    newTimeSlot = new time_slot();
+                    newTimeSlot.start_at_date = item.time.start_at_date;
+                    newTimeSlot.end_at_date = item.time.end_at_date;
+                    newTimeSlot.start_at_hour = item.time.start_at_hour;
+                    newTimeSlot.end_at_hour = item.time.end_at_hour;
+                    newTimeSlot.day_of_week = item.time.day_of_week;
+                    newScheduleSlot.time_slot_code = timeSlotBL.InsertTimeSlot(TimeSlotBL.ConvertTimeSlotToModel(newTimeSlot));
+                    newScheduleSlot.volunteering_details_code = listOfVolunteeringDetails.Find(v => v.volunteer_ID == item.volunteer.volunteer_ID && v.org_code == item.orgCode).volunteering_details_code;
+                    newScheduleSlot.neediness_details_code = listOfNeedinessDetails.Find(n => n.needy_ID == item.needy.needy_ID && n.org_code == item.orgCode).neediness_details_code;
+                    dBConnection.Execute<schedule>((newScheduleSlot), DBConnection.ExecuteActions.Insert);
+
+                    //מסיר מכל הרשימות של רבע שעה לפני ההתנדבות עד רבע שעה אחרי את המתנדב הזה
+                    for (i = item.time.start_at_hour - 1; i <= item.time.end_at_hour + 1; i++)
+                    {
+                        if (volunteersPossibleTimeDictionary[item.time.day_of_week-1, i - 1].Contains(item.volunteer))
+                        {
+                            volunteersPossibleTimeDictionary[item.time.day_of_week, i - 1].Remove(item.volunteer);
+                        }
+                    }
+            }
+
+            //בדיקה של רבע שעה קדימה ואחורה
+            foreach (var item in noVolunteers)
+            {
+                if (volunteersPossibleTimeDictionary[item.time.day_of_week - 1, item.time.start_at_hour - 1].Count > 0)
+                {
+                    item.volunteer = volunteersPossibleTimeDictionary[item.time.day_of_week - 1, item.time.start_at_hour - 1][0];
+                    volunteersPossibleTimeDictionary[item.time.day_of_week - 1, item.time.start_at_hour - 1].RemoveAt(0);
+                }
+
+                else
+                {
+                    if (volunteersPossibleTimeDictionary[item.time.day_of_week - 1, item.time.start_at_hour + 1].Count > 0)
+                    {
+                        item.volunteer = volunteersPossibleTimeDictionary[item.time.day_of_week - 1, item.time.start_at_hour + 1][0];
+                        volunteersPossibleTimeDictionary[item.time.day_of_week - 1, item.time.start_at_hour + 1].RemoveAt(0);
+                    }
+
+                    else
+                    {
+                        noVolunteers.Remove(item);
+                    }
+                }
+            }
+
+            //הכנסה של החדשים
+            foreach (var item in noVolunteers)
             {
                 newTimeSlot = new time_slot();
                 newTimeSlot.start_at_date = item.time.start_at_date;
@@ -155,9 +255,10 @@ namespace BL.Classes
                 newTimeSlot.day_of_week = item.time.day_of_week;
                 newScheduleSlot.time_slot_code = timeSlotBL.InsertTimeSlot(TimeSlotBL.ConvertTimeSlotToModel(newTimeSlot));
                 newScheduleSlot.volunteering_details_code = listOfVolunteeringDetails.Find(v => v.volunteer_ID == item.volunteer.volunteer_ID && v.org_code == item.orgCode).volunteering_details_code;
-                newScheduleSlot.neediness_details_code = listOfNeedinessDetails.Find(n=>n.needy_ID==item.needy.needy_ID && n.org_code==item.orgCode).neediness_details_code;              
+                newScheduleSlot.neediness_details_code = listOfNeedinessDetails.Find(n => n.needy_ID == item.needy.needy_ID && n.org_code == item.orgCode).neediness_details_code;
                 dBConnection.Execute<schedule>((newScheduleSlot), DBConnection.ExecuteActions.Insert);
             }
         }
-    }  
+#endregion
+    }
 }
