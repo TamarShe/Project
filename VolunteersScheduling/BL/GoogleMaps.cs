@@ -87,13 +87,13 @@ namespace BL
         //בניית כתובת עבור הגוגל מפס
         static string BuildUrlForLocationId(string address)
         {
-            return "https://maps.googleapis.com/maps/api/place/textsearch/json?key=AIzaSyAyEYq8aMTFp3eNcRxWj3z4rFPLx7BamYo&query=" + address;
+            return "https://maps.googleapis.com/maps/api/place/textsearch/json?key=<<YOUR_API_KEY>>&query=" + address;
         }
         //בניית פונקציית המרחק
         static string BuildUrlForDistance(string path1, string path2)
         {
             string url = "https://maps.googleapis.com/maps/api/distancematrix/json?destinations=place_id:";
-            url += path1 + "&origins=place_id:" + path2 + "&key=AIzaSyAyEYq8aMTFp3eNcRxWj3z4rFPLx7BamYo";
+            url += path1 + "&origins=place_id:" + path2 + "&key=<<YOUR_API_KEY>>";
             return url;
         }
     }
